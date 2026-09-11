@@ -111,6 +111,8 @@ const translations = {
     domainStatusChecking: 'Checking domain status...',
     domainStatusExpired: 'This domain has expired.',
     domainStatusEndsOn: 'Domain expires on:',
+    domainStatusDaysLeft: '{days} days left',
+    domainStatusStale: 'last checked {date}',
     domainStatusUnavailable: 'Domain status is unavailable.',
     apiAccessTitle: 'Developer API Access',
     apiAccessSubtitle:
@@ -330,6 +332,8 @@ const translations = {
     domainStatusChecking: 'Mengecek masa aktif domain...',
     domainStatusExpired: 'Domain ini sudah kedaluwarsa.',
     domainStatusEndsOn: 'Domain berakhir:',
+    domainStatusDaysLeft: 'Sisa {days} hari',
+    domainStatusStale: 'terakhir dicek {date}',
     domainStatusUnavailable: 'Masa aktif domain belum tersedia.',
     apiAccessTitle: 'Akses API Developer',
     apiAccessSubtitle:

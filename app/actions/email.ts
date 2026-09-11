@@ -53,19 +53,18 @@ export async function getDomainsData() {
 }
 
 export async function getDomainExpiration(domain: string) {
+  if (!domain) return { expiresAt: null, checkedAt: new Date().toISOString(), stale: false };
   try {
-    const { domainExpirationKey } = await import('@/lib/storage-keys');
-    const raw = await storage.get(domainExpirationKey(domain));
-    const record =
-      raw && typeof raw === 'object'
-        ? (raw as { expiresAt?: string | null; checkedAt?: string })
-        : null;
+    const { resolveDomainExpiration } = await import('@/lib/domain-expiration');
+    const record = await resolveDomainExpiration(domain);
     return {
-      expiresAt: record?.expiresAt ?? null,
-      checkedAt: record?.checkedAt ?? new Date().toISOString(),
+      expiresAt: record.expiresAt,
+      checkedAt: record.checkedAt,
+      stale: record.stale,
     };
-  } catch {
-    return { expiresAt: null, checkedAt: new Date().toISOString() };
+  } catch (error) {
+    console.error('Domain expiration action error:', error);
+    return { expiresAt: null, checkedAt: new Date().toISOString(), stale: false };
   }
 }
 

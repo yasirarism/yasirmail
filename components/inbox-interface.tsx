@@ -74,6 +74,9 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
   const [isAddDomainOpen, setIsAddDomainOpen] = useState(false);
   const [showDomainMenu, setShowDomainMenu] = useState(false);
   const [domainExpiration, setDomainExpiration] = useState<string | null>(null);
+  const [domainExpirationResolved, setDomainExpirationResolved] = useState(false);
+  const [domainStatusStale, setDomainStatusStale] = useState(false);
+  const [domainStatusCheckedAt, setDomainStatusCheckedAt] = useState<string | null>(null);
   const [domainStatusLoading, setDomainStatusLoading] = useState(false);
   const [filterQuery, setFilterQuery] = useState('');
   const [showFilter, setShowFilter] = useState(false);
@@ -92,6 +95,9 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
   const selectedSender = selectedEmail ? getSenderInfo(selectedEmail.from) : null;
   const domainExpirationDate = domainExpiration ? new Date(domainExpiration) : null;
   const isDomainExpired = domainExpirationDate ? domainExpirationDate.getTime() < Date.now() : false;
+  const domainDaysLeft = domainExpirationDate && !isDomainExpired
+    ? Math.max(0, Math.ceil((domainExpirationDate.getTime() - Date.now()) / 86400000))
+    : null;
 
   const downloadEmail = useCallback(() => {
     if (!selectedEmail) return;
@@ -210,34 +216,81 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
     });
   }, []);
 
+  const loadDomainExpiration = useCallback(async (targetDomain: string) => {
+    setDomainStatusLoading(true);
+    let resolved: { expiresAt: string | null; checkedAt?: string; stale?: boolean } = { expiresAt: null };
+    try {
+      const data = await getDomainExpiration(targetDomain) as {
+        error?: string; expiresAt?: string | null; checkedAt?: string; stale?: boolean;
+      };
+      if (!data.error) {
+        resolved = { expiresAt: data.expiresAt ?? null, checkedAt: data.checkedAt, stale: data.stale };
+      }
+      setDomainExpiration(resolved.expiresAt);
+      setDomainStatusCheckedAt(resolved.checkedAt ?? null);
+      setDomainStatusStale(Boolean(resolved.stale));
+    } catch (error) {
+      console.error(error);
+      setDomainExpiration(null);
+      setDomainStatusCheckedAt(null);
+      setDomainStatusStale(false);
+    } finally {
+      setDomainExpirationResolved(true);
+      setDomainStatusLoading(false);
+    }
+    return resolved;
+  }, []);
+
+  // Domain status: initial fetch + periodic refresh (keeps sisa hari akurat)
   useEffect(() => {
     if (!domain) return;
-    let active = true;
-    const fetchExpiration = async () => {
-      setDomainStatusLoading(true);
-      try {
-        const data = await getDomainExpiration(domain);
-        if (active && !(data as { error?: string }).error) {
-          setDomainExpiration((data as { expiresAt: string | null }).expiresAt ?? null);
-        } else if (active) {
-          setDomainExpiration(null);
-        }
-      } catch (error) {
-        console.error(error);
-        if (active) {
-          setDomainExpiration(null);
-        }
-      } finally {
-        if (active) {
-          setDomainStatusLoading(false);
+    const statusKey = `dispo_domain_status_${domain}`;
+    const cacheTtlMs = 2 * 60 * 1000;
+    setDomainExpirationResolved(false);
+    setDomainExpiration(null);
+    try {
+      const cachedRaw = localStorage.getItem(statusKey);
+      if (cachedRaw) {
+        const cached = JSON.parse(cachedRaw) as {
+          expiresAt?: string | null; checkedAt?: string; stale?: boolean; fetchedAt?: number;
+        };
+        const fresh = typeof cached.fetchedAt === 'number' && Date.now() - cached.fetchedAt < cacheTtlMs;
+        if (fresh && cached.expiresAt) {
+          setDomainExpiration(cached.expiresAt);
+          setDomainStatusCheckedAt(cached.checkedAt ?? null);
+          setDomainStatusStale(Boolean(cached.stale));
+          setDomainExpirationResolved(true);
         }
       }
+    } catch {
+      // ignore malformed cache
+    }
+
+    const run = async () => {
+      const resolved = await loadDomainExpiration(domain);
+      try {
+        localStorage.setItem(statusKey, JSON.stringify({
+          expiresAt: resolved.expiresAt,
+          checkedAt: resolved.checkedAt,
+          stale: resolved.stale,
+          fetchedAt: Date.now(),
+        }));
+      } catch {
+        // cache write is best-effort
+      }
     };
-    fetchExpiration();
+
+    run();
+    const interval = setInterval(run, 5 * 60 * 1000);
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') run();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
     return () => {
-      active = false;
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
-  }, [domain]);
+  }, [domain, loadDomainExpiration]);
 
   // Load saved data
   useEffect(() => {
@@ -673,7 +726,7 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
           </div>
         </div>
 
-        {/* Domain status line */}
+        {/* Domain status line: selalu tampil (checking / aktif + sisa hari / expired / unavailable) */}
         {domainExpirationDate && isDomainExpired ? (
           <div
             style={{
@@ -693,11 +746,24 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
             <span>⚠️</span>
             {t.domainStatusExpired}
           </div>
-        ) : domainExpirationDate ? (
+        ) : (
           <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: 14 }}>
-            📅 <strong>{domain}</strong> &middot; {t.domainStatusEndsOn} <strong>{domainExpirationDate.toLocaleDateString()}</strong>
+            {domainExpirationDate && domainDaysLeft !== null ? (
+              <>
+                📅 <strong>{domain}</strong> &middot; {t.domainStatusEndsOn}{' '}
+                <strong>{domainExpirationDate.toLocaleDateString()}</strong>{' '}
+                &middot; {t.domainStatusDaysLeft.replace('{days}', `${domainDaysLeft}`)}
+                {domainStatusStale && domainStatusCheckedAt ? (
+                  <> &middot; <em>{t.domainStatusStale.replace('{date}', new Date(domainStatusCheckedAt).toLocaleDateString())}</em></>
+                ) : null}
+              </>
+            ) : domainStatusLoading || !domainExpirationResolved ? (
+              <span>{t.domainStatusChecking}</span>
+            ) : (
+              <span>{t.domainStatusUnavailable}</span>
+            )}
           </p>
-        ) : null}
+        )}
 
         {/* Action Row: Copy Address (Fixed width/flex) + New + QR Code */}
         <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>

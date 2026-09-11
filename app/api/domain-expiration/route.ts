@@ -1,10 +1,8 @@
 import { NextResponse } from 'next/server';
-import { getStoredDomainExpiration, refreshDomainExpiration } from '@/lib/domain-expiration';
+import { resolveDomainExpiration } from '@/lib/domain-expiration';
 import { authorizeRawApi, unauthorizedResponse } from '@/lib/raw-api-auth';
 
 export const dynamic = 'force-dynamic';
-
-const MAX_AGE_HOURS = 24;
 
 export async function GET(req: Request) {
   if (!(await authorizeRawApi(req))) {
@@ -18,15 +16,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: 'Domain required' }, { status: 400 });
   }
 
-  const stored = await getStoredDomainExpiration(domain);
-  if (stored?.expiresAt) {
-    const checkedAt = new Date(stored.checkedAt).getTime();
-    const ageHours = (Date.now() - checkedAt) / (1000 * 60 * 60);
-    if (Number.isFinite(ageHours) && ageHours < MAX_AGE_HOURS) {
-      return NextResponse.json(stored);
-    }
-  }
-
-  const refreshed = await refreshDomainExpiration(domain);
-  return NextResponse.json(refreshed);
+  // resolveDomainExpiration sudah menangani cache 24 jam + retry saat lookup gagal.
+  const resolved = await resolveDomainExpiration(domain);
+  return NextResponse.json(resolved);
 }
