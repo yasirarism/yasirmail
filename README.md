@@ -1,4 +1,4 @@
-# Vaultmail
+# Yasirmail
 
 Temporary email service with disposable inboxes. Built with Next.js.
 
