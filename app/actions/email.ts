@@ -3,6 +3,7 @@
 import { getInboxEmails } from '@/lib/inbox-service';
 import { storage } from '@/lib/storage';
 import { inboxKey } from '@/lib/storage-keys';
+import { buildEmlDocument, sanitizeFilename, type EmlEmail } from '@/lib/email-eml';
 
 /**
  * Server-side data fetching for the web UI.
@@ -98,10 +99,10 @@ export async function downloadEmailContent(address: string, emailId: string) {
       return item.id === emailId;
     });
     if (!email) return { error: 'Email not found' };
-    const content = JSON.stringify(email, null, 2);
-    const subject = (email as { subject?: string }).subject || 'email';
-    const filename = subject.replace(/[^a-z0-9-_.]+/gi, '_').replace(/^_+|_+$/g, '') || 'email';
-    return { content, filename: `${filename}.json`, type: 'application/json' };
+    const content = buildEmlDocument(email as EmlEmail);
+    const subject = (email as { subject?: string }).subject;
+    const filename = sanitizeFilename(subject || 'email', 'email');
+    return { content, filename: `${filename}.eml`, type: 'message/rfc822;charset=utf-8' };
   } catch (error) {
     return { error: error instanceof Error ? error.message : 'Download failed' };
   }

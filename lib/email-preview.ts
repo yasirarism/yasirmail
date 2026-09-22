@@ -80,21 +80,34 @@ const highlightOtpCodes = (html: string) => {
   const nodes: Text[] = [];
   while (walker.nextNode()) {
     const node = walker.currentNode as Text;
-    const text = node.nodeValue || '';
-    const standalone = /^\s*\d{4,8}\s*$/.test(text);
-    if ((standalone || keywordRegex.test(text)) && codeRegex.test(text)) {
+    if (node.parentElement?.closest('a, button, script, style, pre, code, mark')) {
+      continue;
+    }
+    const rawText = node.nodeValue || '';
+    const textWithoutUrls = rawText.replace(/https?:\/\/[^\s<>"')]+/gi, ' ').trim();
+    const standalone = /^\d{4,8}$/.test(textWithoutUrls);
+    if ((standalone || keywordRegex.test(textWithoutUrls)) && codeRegex.test(textWithoutUrls)) {
       nodes.push(node);
     }
     codeRegex.lastIndex = 0;
   }
   nodes.forEach((node) => {
-    const replaced = (node.nodeValue || '').replace(
+    const rawVal = node.nodeValue || '';
+    const urls: string[] = [];
+    const masked = rawVal.replace(/https?:\/\/[^\s<>"')]+/gi, (url) => {
+      urls.push(url);
+      return `__URL_MASK_${urls.length - 1}__`;
+    });
+
+    const replaced = masked.replace(
       codeRegex,
       '<mark data-copy-code="$1" title="Copy code">$1</mark>'
     );
-    if (replaced === node.nodeValue) return;
+    if (replaced === masked) return;
+
+    const restored = replaced.replace(/__URL_MASK_(\d+)__/g, (_, idx) => urls[Number(idx)] || '');
     const wrap = doc.createElement('span');
-    wrap.innerHTML = replaced;
+    wrap.innerHTML = restored;
     node.parentNode?.replaceChild(wrap, node);
   });
   return `<!doctype html>${doc.documentElement.outerHTML}`;

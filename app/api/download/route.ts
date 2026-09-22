@@ -1,23 +1,9 @@
 import { NextResponse } from 'next/server';
 import { inboxKey } from '@/lib/storage-keys';
 import { storage } from '@/lib/storage';
+import { buildEmlDocument, sanitizeFilename, type EmlEmail } from '@/lib/email-eml';
 
-type InboxEmail = {
-  id?: string;
-  from?: string;
-  to?: string;
-  subject?: string;
-  text?: string;
-  html?: string;
-  receivedAt?: string;
-  attachments?: Array<{
-    filename?: string;
-    contentType?: string;
-    contentBase64?: string;
-    omitted?: boolean;
-    size?: number;
-  }>;
-};
+type InboxEmail = EmlEmail;
 
 const parseEmail = (value: unknown): InboxEmail | null => {
   if (!value) return null;
@@ -32,41 +18,6 @@ const parseEmail = (value: unknown): InboxEmail | null => {
     return value as InboxEmail;
   }
   return null;
-};
-
-const sanitizeFilename = (value: string, fallback: string) => {
-  const safe = value
-    .replace(/[^a-z0-9-_.]+/gi, '_')
-    .replace(/^_+|_+$/g, '')
-    .slice(0, 60);
-  return safe || fallback;
-};
-
-const htmlToText = (value: string) =>
-  value
-    .replace(/<style[\s\S]*?<\/style>/gi, '')
-    .replace(/<script[\s\S]*?<\/script>/gi, '')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-
-const buildEmailContent = (email: InboxEmail) => {
-  const subject = email.subject || '(No Subject)';
-  const textBody = email.text?.trim() || '';
-  const htmlBody = email.html?.trim() || '';
-  const useHtml = Boolean(htmlBody);
-  const body = useHtml ? htmlBody : textBody || (htmlBody ? htmlToText(htmlBody) : '');
-  const contentType = useHtml ? 'text/html' : 'text/plain';
-  return [
-    `From: ${email.from || ''}`,
-    `To: ${email.to || ''}`,
-    `Subject: ${subject}`,
-    `Date: ${email.receivedAt ? new Date(email.receivedAt).toUTCString() : ''}`,
-    'MIME-Version: 1.0',
-    `Content-Type: ${contentType}; charset=utf-8`,
-    '',
-    body
-  ].join('\n');
 };
 
 export async function GET(req: Request) {
@@ -94,7 +45,7 @@ export async function GET(req: Request) {
   }
 
   if (type === 'email') {
-    const content = buildEmailContent(selected);
+    const content = buildEmlDocument(selected);
     const filename = sanitizeFilename(selected.subject || 'email', 'email');
     return new NextResponse(content, {
       headers: {

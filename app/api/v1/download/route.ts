@@ -2,19 +2,11 @@ import { NextResponse } from 'next/server';
 import { inboxKey } from '@/lib/storage-keys';
 import { storage } from '@/lib/storage';
 import { authenticateApiRequest } from '@/lib/api-auth';
+import { buildEmlDocument, sanitizeFilename, type EmlEmail } from '@/lib/email-eml';
 
 export const dynamic = 'force-dynamic';
 
-type InboxEmail = {
-  id?: string;
-  subject?: string;
-  attachments?: Array<{
-    filename?: string;
-    contentType?: string;
-    contentBase64?: string;
-    omitted?: boolean;
-  }>;
-};
+type InboxEmail = EmlEmail;
 
 const parseEmail = (value: unknown): InboxEmail | null => {
   if (!value) return null;
@@ -23,11 +15,6 @@ const parseEmail = (value: unknown): InboxEmail | null => {
   }
   if (typeof value === 'object') return value as InboxEmail;
   return null;
-};
-
-const sanitizeFilename = (value: string, fallback: string) => {
-  const safe = value.replace(/[^a-z0-9-_.]+/gi, '_').replace(/^_+|_+$/g, '');
-  return safe || fallback;
 };
 
 export async function GET(req: Request) {
@@ -43,6 +30,7 @@ export async function GET(req: Request) {
   const address = searchParams.get('address');
   const emailId = searchParams.get('emailId');
   const type = searchParams.get('type');
+  const format = searchParams.get('format');
   const indexParam = searchParams.get('index');
 
   if (!address || !emailId || !type) {
@@ -59,8 +47,17 @@ export async function GET(req: Request) {
   }
 
   if (type === 'email') {
-    const content = JSON.stringify(selected, null, 2);
     const filename = sanitizeFilename(selected.subject || 'email', 'email');
+    if (format === 'eml') {
+      const content = buildEmlDocument(selected);
+      return new NextResponse(content, {
+        headers: {
+          'Content-Type': 'message/rfc822;charset=utf-8',
+          'Content-Disposition': `attachment; filename="${filename}.eml"`,
+        },
+      });
+    }
+    const content = JSON.stringify(selected, null, 2);
     return new NextResponse(content, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

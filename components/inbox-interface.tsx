@@ -29,22 +29,57 @@ import { SettingsDialog } from './settings-dialog';
 
 // Extract an OTP / verification code from subject + body (mirrors ruangmail).
 function extractOtp(subject: string, body: string): string | null {
-  const text = `${subject || ''} ${body || ''}`;
+  const raw = `${subject || ''}\n${body || ''}`;
+
+  // 1. Strip styles and scripts
+  let clean = raw
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ');
+
+  // 2. Strip URLs and email addresses so tokens/IDs/dates in links are never matched as OTP
+  clean = clean
+    .replace(/https?:\/\/[^\s<>"')]+/gi, ' ')
+    .replace(/www\.[^\s<>"')]+/gi, ' ')
+    .replace(/[\w.+-]+@[\w-]+\.[\w.-]+/gi, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/\r\n/g, '\n');
+
   const patterns = [
-    /(?:verification|verifying|authentication|security|access|login|sign[- ]?in|confirmation|confirm|activation|authorize|authorisation|one[- ]?time|temporary|security)\s+(?:email\s+)?(?:code|passcode|password|pin|token|number|digits?)\s*(?:is|:|：|=|-)?\s*([\d][\d\s-]{3,14}\d)/i,
-    /(?:code|passcode|password|pin|token|otp|kode|sandi|nomor\s+rahasia)\s*(?:is|:|：|=|-|adalah|ialah)?\s*([\d][\d\s-]{3,14}\d)/i,
-    /([\d][\d\s-]{3,14}\d)\s+(?:is\s+(?:your\s+)?)?(?:the\s+)?(?:verification|authentication|security|login|sign[- ]?in|confirmation|activation)?\s*(?:code|passcode|password|pin|token|otp)/i,
-    /(?:enter|input|type|masukkan|gunakan|use)\s+(?:the\s+)?(?:code|passcode|pin|otp|token)\s*(?:below|di bawah)?\s*[:：]?\s*([\d][\d\s-]{3,14}\d)/i,
-    /\b(?:OTP|PIN|CODE|TOKEN)\b\s*[:：=-]\s*([\d][\d\s-]{3,14}\d)/i,
-    /\b(\d{4,8})\b/,
+    // Pattern 1: Contextual label + code (English & Indonesian)
+    /(?:verification|verifying|authentication|security|access|login|sign[- ]?in|confirmation|confirm|activation|authorize|authorisation|one[- ]?time|temporary|verifikasi|keamanan|masuk|aktivasi)\s+(?:email\s+|akun\s+)?(?:code|passcode|password|pin|token|number|digits?|kode|sandi|nomor)?(?:\s+(?:anda|kamu|is|adalah|ialah))?\s*[:：=-]?\s*([\d][\d\s-]{2,10}\d)/i,
+    // Pattern 2: Explicit "code is 123456" / "kode: 123456"
+    /(?:code|passcode|password|pin|token|otp|kode|sandi|nomor\s+rahasia)(?:\s+(?:otp|verifikasi|anda|kamu|is|adalah|ialah))*\s*[:：=-]?\s*([\d][\d\s-]{2,10}\d)/i,
+    // Pattern 3: "123456 is your code"
+    /([\d][\d\s-]{2,10}\d)\s+(?:is\s+(?:your\s+)?)?(?:the\s+)?(?:verification|authentication|security|login|sign[- ]?in|confirmation|activation|verifikasi|kode)?\s*(?:code|passcode|password|pin|token|otp|kode)/i,
+    // Pattern 4: "enter 123456", "use 123456", "masukkan kode 123456"
+    /(?:enter|input|type|masukkan|gunakan|use)\s+(?:the\s+)?(?:code|passcode|pin|otp|token\s+)?(?:below|di bawah)?\s*[:：]?\s*([\d][\d\s-]{2,10}\d)/i,
+    // Pattern 5: Uppercase OTP/PIN/CODE: 123456
+    /\b(?:OTP|PIN|CODE|TOKEN|KODE)\b\s*[:：=-]?\s*([\d][\d\s-]{2,10}\d)/i,
   ];
+
   for (const re of patterns) {
-    const match = text.match(re);
+    const match = clean.match(re);
     if (match?.[1]) {
       const candidate = match[1].replace(/[\s-]/g, '');
       if (/^\d{4,8}$/.test(candidate)) return candidate;
     }
   }
+
+  // Fallback: standalone line ONLY if context keywords are present
+  const hasVerificationContext = /\b(otp|verification|verifikasi|code|kode|passcode|pin|auth|security|activation|aktivasi|login|masuk)\b/i.test(clean);
+  if (hasVerificationContext) {
+    const lines = clean.split('\n');
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (/^\d{4,8}$/.test(trimmed)) {
+        const num = parseInt(trimmed, 10);
+        if (num >= 2020 && num <= 2035) continue;
+        return trimmed;
+      }
+    }
+  }
+
   return null;
 }
 
