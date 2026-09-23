@@ -666,20 +666,21 @@ html[data-theme='candy'] .brutal-card-lg {
 html[data-theme='candy'] .brutal-card-lg::before {
   content: '';
   position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 120px;
-  height: 120px;
+  top: -24px;
+  right: -24px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f472b6 0%, #a78bfa 100%);
-  opacity: 0.25;
+  background: #f472b6 !important;
+  opacity: 0.35 !important;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
   pointer-events: none;
+  z-index: 2 !important;
 }
 
 html[data-theme='candy'] .brutal-card-lg:hover::before {
   transform: scale(1.35);
-  opacity: 0.38;
+  opacity: 0.48 !important;
 }
 
 html[data-theme='candy'] .brutal-card::before {
@@ -703,17 +704,17 @@ html[data-theme='candy'] .brutal-card:hover::before {
 /* Stat Cards: different pastel colored corner blobs! */
 html[data-theme='candy'] div[style*='gridTemplateColumns'] > div:nth-child(1) .brutal-card::before,
 html[data-theme='candy'] .brutal-card:nth-of-type(1)::before {
-  background: #38bdf8;
+  background: #38bdf8 !important;
 }
 
 html[data-theme='candy'] div[style*='gridTemplateColumns'] > div:nth-child(2) .brutal-card::before,
 html[data-theme='candy'] .brutal-card:nth-of-type(2)::before {
-  background: #a78bfa;
+  background: #a78bfa !important;
 }
 
 html[data-theme='candy'] div[style*='gridTemplateColumns'] > div:nth-child(3) .brutal-card::before,
 html[data-theme='candy'] .brutal-card:nth-of-type(3)::before {
-  background: #ec4899;
+  background: #ec4899 !important;
 }
 
 /* Buttons */
@@ -820,26 +821,8 @@ html[data-theme='candy'] button[title*='History'] {
   border-radius: 10px !important;
 }
 
-html[data-theme='candy'] .brutal-btn-accent {
-  background: linear-gradient(135deg, #f43f8e 0%, #ec4899 100%) !important;
-  border: none !important;
-  color: #ffffff !important;
-  box-shadow: 0 8px 20px -3px rgba(236, 72, 153, 0.45) !important;
-  border-radius: 9999px !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-html[data-theme='candy'] .brutal-btn-accent2,
-html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-accent-2)'] {
-  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%) !important;
-  border: none !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.28) !important;
-  border-radius: 9999px !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-html[data-theme='candy'] .brutal-btn,
+/* Base brutal-btn: white pill ONLY for non-accent buttons */
+html[data-theme='candy'] .brutal-btn:not(.brutal-btn-accent):not(.brutal-btn-accent2),
 html[data-theme='candy'] .brutal-btn-white,
 html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)'] {
   background: #ffffff !important;
@@ -850,13 +833,67 @@ html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)'] {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-html[data-theme='candy'] .brutal-btn:hover,
+html[data-theme='candy'] .brutal-btn:not(.brutal-btn-accent):not(.brutal-btn-accent2):hover,
 html[data-theme='candy'] .brutal-btn-white:hover,
 html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)']:hover {
   background: #faf7ff !important;
   border-color: rgba(167, 139, 250, 0.6) !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 5px 16px rgba(124, 58, 237, 0.14) !important;
+}
+
+/* Accent Buttons: ALWAYS Pink/Magenta gradient with WHITE text */
+html[data-theme='candy'] .brutal-btn.brutal-btn-accent,
+html[data-theme='candy'] .brutal-btn-accent,
+html[data-theme='candy'] a.brutal-btn-accent,
+html[data-theme='candy'] button.brutal-btn-accent {
+  background: linear-gradient(135deg, #f43f8e 0%, #ec4899 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px -2px rgba(236, 72, 153, 0.45) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn.brutal-btn-accent:hover,
+html[data-theme='candy'] .brutal-btn-accent:hover,
+html[data-theme='candy'] a.brutal-btn-accent:hover,
+html[data-theme='candy'] button.brutal-btn-accent:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px -2px rgba(236, 72, 153, 0.6) !important;
+  filter: brightness(1.05) !important;
+}
+
+html[data-theme='candy'] .brutal-btn-accent,
+html[data-theme='candy'] .brutal-btn-accent *,
+html[data-theme='candy'] a.brutal-btn-accent,
+html[data-theme='candy'] a.brutal-btn-accent *,
+html[data-theme='candy'] button.brutal-btn-accent,
+html[data-theme='candy'] button.brutal-btn-accent * {
+  color: #ffffff !important;
+}
+
+/* Secondary Accent Buttons: Cyan to Blue gradient with WHITE text */
+html[data-theme='candy'] .brutal-btn.brutal-btn-accent2,
+html[data-theme='candy'] .brutal-btn-accent2,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-accent-2)'] {
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.28) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn-accent2,
+html[data-theme='candy'] .brutal-btn-accent2 * {
+  color: #ffffff !important;
 }
 
 /* Address bar container */
@@ -993,12 +1030,162 @@ html[data-theme='candy'] .brutal-btn-accent2 * {
   color: #ffffff !important;
 }
 
-html[data-theme='candy'] .text-muted-foreground,
-html[data-theme='candy'] .text-white\/40,
+html[data-theme='candy'] .text-muted-foreground {
+  color: #64748b !important;
+}
+
+html[data-theme='candy'] .text-white\/70,
+html[data-theme='candy'] .text-white\/60 {
+  color: #475569 !important;
+  font-weight: 500 !important;
+}
+
 html[data-theme='candy'] .text-white\/50,
-html[data-theme='candy'] .text-white\/60,
-html[data-theme='candy'] .text-white\/70 {
-  color: var(--text-muted) !important;
+html[data-theme='candy'] .text-white\/40 {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+/* Accent text variants -> high-contrast readable colors */
+html[data-theme='candy'] .text-blue-200\/70,
+html[data-theme='candy'] .text-blue-300,
+html[data-theme='candy'] .text-blue-400 {
+  color: #7c3aed !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme='candy'] .text-orange-200,
+html[data-theme='candy'] .text-orange-300 {
+  color: #ea580c !important;
+}
+
+html[data-theme='candy'] .text-emerald-200,
+html[data-theme='candy'] .text-emerald-300 {
+  color: #059669 !important;
+}
+
+html[data-theme='candy'] .text-purple-200,
+html[data-theme='candy'] .text-purple-300,
+html[data-theme='candy'] .text-purple-400 {
+  color: #7c3aed !important;
+}
+
+html[data-theme='candy'] .text-red-200,
+html[data-theme='candy'] .text-red-300,
+html[data-theme='candy'] .text-red-400 {
+  color: #e11d48 !important;
+}
+
+html[data-theme='candy'] label {
+  color: #334155 !important;
+}
+
+/* ============================================================
+   CANDY THEME — TOOLS PAGES & SUB-PAGES FIXES
+   ============================================================ */
+/* Main tools container */
+html[data-theme='candy'] .glass-card {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 10px 30px -5px rgba(124, 58, 237, 0.08) !important;
+  border-radius: var(--brutal-radius-2xl) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-theme='candy'] .glass-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #f472b6 !important;
+  opacity: 0.28 !important;
+  pointer-events: none;
+}
+
+/* Individual tool cards in the grid */
+html[data-theme='candy'] .glass-card .bg-black\/40,
+html[data-theme='candy'] .bg-black\/40 {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06) !important;
+  border-radius: 16px !important;
+  color: var(--text-primary) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+html[data-theme='candy'] .glass-card .bg-black\/40:hover,
+html[data-theme='candy'] .bg-black\/40:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167, 139, 250, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12) !important;
+}
+
+/* Corner blobs on individual tool cards */
+html[data-theme='candy'] .glass-card .bg-black\/40::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  opacity: 0.28;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+}
+
+html[data-theme='candy'] .glass-card .bg-black\/40:hover::before {
+  transform: scale(1.35);
+  opacity: 0.42;
+}
+
+html[data-theme='candy'] .glass-card .bg-black\/40:nth-child(3n+1)::before { background: #38bdf8 !important; }
+html[data-theme='candy'] .glass-card .bg-black\/40:nth-child(3n+2)::before { background: #a855f7 !important; }
+html[data-theme='candy'] .glass-card .bg-black\/40:nth-child(3n)::before { background: #f472b6 !important; }
+
+/* Buttons inside tool cards */
+html[data-theme='candy'] .glass-card a.bg-white\/10,
+html[data-theme='candy'] .glass-card button.bg-white\/10,
+html[data-theme='candy'] a.bg-white\/10,
+html[data-theme='candy'] button.bg-white\/10 {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
+  transition: all 0.2s ease !important;
+}
+
+html[data-theme='candy'] .glass-card a.bg-white\/10:hover,
+html[data-theme='candy'] .glass-card button.bg-white\/10:hover,
+html[data-theme='candy'] a.bg-white\/10:hover,
+html[data-theme='candy'] button.bg-white\/10:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.45) !important;
+}
+
+/* Badge in tool header */
+html[data-theme='candy'] .glass-card span.bg-white\/10 {
+  background: rgba(167, 139, 250, 0.15) !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  color: #7c3aed !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+}
+
+/* Tool title and icons */
+html[data-theme='candy'] .glass-card h1,
+html[data-theme='candy'] .glass-card p.font-semibold {
+  color: #1e1b4b !important;
 }
 
 /* ============================================================
@@ -1164,6 +1351,34 @@ html[data-theme='candy'] button:has(> .theme-preview-neomorph):hover,
 html[data-theme='candy'] button:has(> .theme-preview-candy):hover {
   background: #faf7ff !important;
   border-color: rgba(167, 139, 250, 0.5) !important;
+}
+
+html[data-theme='candy'] .border-blue-400\/60.bg-blue-400\/10 {
+  border-color: #8b5cf6 !important;
+  background: rgba(139, 92, 246, 0.1) !important;
+}
+
+html[data-theme='candy'] .bg-blue-400\/20.text-blue-200 {
+  background: rgba(139, 92, 246, 0.18) !important;
+  color: #7c3aed !important;
+  font-weight: 800 !important;
+}
+
+/* API Access Inputs & Dropdowns */
+html[data-theme='candy'] input[style*='var(--surface)'],
+html[data-theme='candy'] select[style*='var(--surface)'],
+html[data-theme='candy'] textarea[style*='var(--surface)'] {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.35) !important;
+  color: #1e1b4b !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.04) !important;
+}
+
+html[data-theme='candy'] input[style*='var(--surface)']:focus,
+html[data-theme='candy'] select[style*='var(--surface)']:focus {
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
 }
 
 /* Admin Code snippets */
