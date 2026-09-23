@@ -2,7 +2,7 @@
 
 import { InboxInterface } from "@/components/inbox-interface";
 import { Starfield } from "@/components/starfield";
-import { Menu, Zap, Shield, Globe, Code2, Mail, Sun, Moon, Github, Wrench, Send } from "lucide-react";
+import { Menu, Zap, Shield, Globe, Code2, Mail, Sun, Moon, Sparkles, Github, Wrench, Send } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
@@ -192,6 +192,8 @@ export function HomePage({ initialAddress }: HomePageProps) {
             >
               {theme === 'brutal' ? (
                 <Sun className="h-4 w-4" />
+              ) : theme === 'candy' ? (
+                <Sparkles className="h-4 w-4" />
               ) : (
                 <Moon className="h-4 w-4" />
               )}

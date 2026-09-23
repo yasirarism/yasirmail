@@ -35,7 +35,7 @@ export default async function RootLayout({
         <ThemeProvider>
           <AdsenseScript />
           {children}
-          <Toaster position="top-right" theme={defaultTheme === 'brutal' ? 'light' : 'dark'} />
+          <Toaster position="top-right" theme={defaultTheme === 'brutal' || defaultTheme === 'candy' ? 'light' : 'dark'} />
         </ThemeProvider>
       </body>
     </html>

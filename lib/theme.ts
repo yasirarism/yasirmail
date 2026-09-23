@@ -1,12 +1,12 @@
 export const THEME_STORAGE_KEY = 'vaultmail_theme';
 export const THEME_EVENT = 'vaultmail-theme-change';
-export const VISUAL_THEMES = ['brutal', 'glass', 'neomorph'] as const;
+export const VISUAL_THEMES = ['brutal', 'glass', 'neomorph', 'candy'] as const;
 
 export type VisualTheme = (typeof VISUAL_THEMES)[number];
 export const DEFAULT_THEME: VisualTheme = 'brutal';
 
 export const isVisualTheme = (value: string | null): value is VisualTheme =>
-  value === 'brutal' || value === 'glass' || value === 'neomorph';
+  value === 'brutal' || value === 'glass' || value === 'neomorph' || value === 'candy';
 
 export const applyTheme = (theme: VisualTheme) => {
   if (typeof document === 'undefined') return;
@@ -45,6 +45,6 @@ export const subscribeTheme = (onChange: () => void) => {
 };
 
 export const buildThemeBootstrapScript = (fallback: VisualTheme) =>
-  `(function(){try{var t=localStorage.getItem('${THEME_STORAGE_KEY}');document.documentElement.setAttribute('data-theme',(t==='neomorph'||t==='glass'||t==='brutal')?t:'${fallback}');}catch(e){document.documentElement.setAttribute('data-theme','${fallback}');}})();`;
+  `(function(){try{var t=localStorage.getItem('${THEME_STORAGE_KEY}');document.documentElement.setAttribute('data-theme',(t==='candy'||t==='neomorph'||t==='glass'||t==='brutal')?t:'${fallback}');}catch(e){document.documentElement.setAttribute('data-theme','${fallback}');}})();`;
 
 export const THEME_BOOTSTRAP_SCRIPT = buildThemeBootstrapScript(DEFAULT_THEME);

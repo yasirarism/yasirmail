@@ -22,7 +22,7 @@ export function ThemePicker({ t, compact = false }: ThemePickerProps) {
       >
         {t.themeLabel}
       </p>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         <ThemeOption
           active={theme === 'brutal'}
           label={t.themeBrutal}
@@ -41,6 +41,12 @@ export function ThemePicker({ t, compact = false }: ThemePickerProps) {
           preview="neomorph"
           onClick={() => setTheme('neomorph')}
         />
+        <ThemeOption
+          active={theme === 'candy'}
+          label={t.themeCandy}
+          preview="candy"
+          onClick={() => setTheme('candy')}
+        />
       </div>
     </div>
   );
@@ -54,7 +60,7 @@ function ThemeOption({
 }: {
   active: boolean;
   label: string;
-  preview: 'brutal' | 'glass' | 'neomorph';
+  preview: 'brutal' | 'glass' | 'neomorph' | 'candy';
   onClick: () => void;
 }) {
   return (
@@ -73,7 +79,9 @@ function ThemeOption({
             ? 'theme-preview-brutal'
             : preview === 'glass'
               ? 'theme-preview-glass'
-              : 'theme-preview-neomorph'
+              : preview === 'neomorph'
+                ? 'theme-preview-neomorph'
+                : 'theme-preview-candy'
         )}
       />
       <span className="block text-[11px] font-semibold text-white/80">{label}</span>

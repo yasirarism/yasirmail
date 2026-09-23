@@ -92,6 +92,12 @@
   box-shadow: 4px 4px 0 #1a1a1a;
 }
 
+.theme-preview-candy {
+  background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(167, 139, 250, 0.35);
+}
+
 /* Full neomorph template */
 html[data-theme='neomorph'] {
   /* Keep the HSL tokens in sync with --neo-bg so popups/cards that use
@@ -582,6 +588,242 @@ html[data-theme='neomorph'] .howto-step-card p {
 }
 
 /* ============================================================
+   CANDY THEME — Soft pastel, aurora glow, rounded bento cards
+   ============================================================ */
+html[data-theme='candy'],
+html[data-theme='candy'] body,
+html[data-theme='candy'] main {
+  background: 
+    radial-gradient(circle at 10% 15%, rgba(244, 114, 182, 0.16) 0%, transparent 40%),
+    radial-gradient(circle at 85% 25%, rgba(34, 211, 238, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(167, 139, 250, 0.15) 0%, transparent 50%),
+    #f5f0ff !important;
+  color: var(--text-primary);
+}
+
+/* Aurora Blobs */
+html[data-theme='candy'] .theme-blob {
+  display: block !important;
+  filter: blur(60px);
+  opacity: 0.65;
+}
+
+/* Header Navbar: purple to pink gradient */
+html[data-theme='candy'] header {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.18) !important;
+}
+
+html[data-theme='candy'] header a[href='/'] {
+  color: #ffffff !important;
+}
+
+html[data-theme='candy'] header a[href='/'] div {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(8px) !important;
+  color: #ffffff !important;
+}
+
+html[data-theme='candy'] header a[href='/'] div svg {
+  color: #ffffff !important;
+}
+
+html[data-theme='candy'] header .language-toggle,
+html[data-theme='candy'] header [class*='language-toggle'] {
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+html[data-theme='candy'] header .language-toggle button,
+html[data-theme='candy'] header [class*='language-toggle'] button {
+  color: #ffffff !important;
+}
+
+html[data-theme='candy'] header button {
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Cards */
+html[data-theme='candy'] .brutal-card,
+html[data-theme='candy'] .brutal-card-lg {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(167, 139, 250, 0.35) !important;
+  box-shadow: 0 10px 32px rgba(124, 58, 237, 0.08), 0 2px 6px rgba(124, 58, 237, 0.04) !important;
+  border-radius: var(--brutal-radius-2xl) !important;
+}
+
+/* Buttons */
+html[data-theme='candy'] .brutal-btn-accent,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-accent)']:not([style*='var(--brutal-accent-2)']) {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.32) !important;
+  border-radius: 9999px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn-accent:hover,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-accent)']:not([style*='var(--brutal-accent-2)']):hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(139, 92, 246, 0.45) !important;
+  filter: brightness(1.05) !important;
+}
+
+html[data-theme='candy'] .brutal-btn-accent2,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-accent-2)'] {
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.28) !important;
+  border-radius: 9999px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn-accent2:hover,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-accent-2)']:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(6, 182, 212, 0.4) !important;
+  filter: brightness(1.05) !important;
+}
+
+html[data-theme='candy'] .brutal-btn,
+html[data-theme='candy'] .brutal-btn-white,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)'] {
+  background: #ffffff !important;
+  border: 1px solid rgba(167, 139, 250, 0.35) !important;
+  color: #1e1b4b !important;
+  box-shadow: 0 3px 12px rgba(124, 58, 237, 0.08) !important;
+  border-radius: 9999px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn:hover,
+html[data-theme='candy'] .brutal-btn-white:hover,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)']:hover {
+  background: #faf7ff !important;
+  border-color: rgba(167, 139, 250, 0.6) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 5px 16px rgba(124, 58, 237, 0.14) !important;
+}
+
+/* Address bar container */
+html[data-theme='candy'] div[style*='marginBottom: 12'] {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.35) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06) !important;
+}
+
+html[data-theme='candy'] div[style*='marginBottom: 12']:focus-within {
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+}
+
+/* Domain selector trigger */
+html[data-theme='candy'] div[style*='flexShrink: 0'] button[type='button'] {
+  background: rgba(167, 139, 250, 0.1) !important;
+  border: 1px solid rgba(167, 139, 250, 0.2) !important;
+  border-radius: 10px !important;
+  color: var(--text-primary) !important;
+  padding: 6px 12px !important;
+  margin-right: 6px !important;
+}
+
+/* Inputs & Chips */
+html[data-theme='candy'] .brutal-input {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.35) !important;
+  border-radius: 14px !important;
+  color: #1e1b4b !important;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.05) !important;
+}
+
+html[data-theme='candy'] .brutal-input:focus {
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+}
+
+html[data-theme='candy'] .brutal-chip {
+  background: rgba(167, 139, 250, 0.18) !important;
+  color: #7c3aed !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+}
+
+/* Dropdown menus & dialogs */
+html[data-theme='candy'] .domain-menu-panel,
+html[data-theme='candy'] .brutal-menu-dropdown {
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 16px 40px rgba(124, 58, 237, 0.16) !important;
+  border-radius: 16px !important;
+}
+
+/* How-to cards */
+html[data-theme='candy'] .howto-step-card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06) !important;
+  border-radius: 18px !important;
+}
+
+/* Email list rows */
+html[data-theme='candy'] div[style*='borderLeft: 4px solid transparent'],
+html[data-theme='candy'] div[style*='borderLeft: 4px solid var(--brutal-accent)'] {
+  border-radius: 12px !important;
+  transition: all 0.15s ease !important;
+}
+
+html[data-theme='candy'] div[style*='borderLeft: 4px solid transparent']:hover {
+  background: rgba(167, 139, 250, 0.08) !important;
+}
+
+/* Footer */
+html[data-theme='candy'] footer.site-footer {
+  background: rgba(245, 240, 255, 0.92) !important;
+  backdrop-filter: blur(12px) !important;
+  border-top: 1px solid rgba(167, 139, 250, 0.25) !important;
+}
+
+/* Text mappings for light candy theme */
+html[data-theme='candy'] .text-white,
+html[data-theme='candy'] .text-white\/80,
+html[data-theme='candy'] .text-gray-200,
+html[data-theme='candy'] .text-gray-300,
+html[data-theme='candy'] .text-blue-100,
+html[data-theme='candy'] .text-blue-200 {
+  color: var(--text-primary) !important;
+}
+
+html[data-theme='candy'] header .text-white,
+html[data-theme='candy'] header .text-white\/80,
+html[data-theme='candy'] .brutal-btn-accent,
+html[data-theme='candy'] .brutal-btn-accent *,
+html[data-theme='candy'] .brutal-btn-accent2,
+html[data-theme='candy'] .brutal-btn-accent2 * {
+  color: #ffffff !important;
+}
+
+html[data-theme='candy'] .text-muted-foreground,
+html[data-theme='candy'] .text-white\/40,
+html[data-theme='candy'] .text-white\/50,
+html[data-theme='candy'] .text-white\/60,
+html[data-theme='candy'] .text-white\/70 {
+  color: var(--text-muted) !important;
+}
+
+/* ============================================================
    BRUTAL DESIGN SYSTEM (ruangmail.biz.id inspired)
    ============================================================ */
 
@@ -661,6 +903,52 @@ html[data-theme='neomorph'] {
   --brutal-success: #3fb950;
   --brutal-howto-bg: rgba(57, 67, 90, 0.62);
   --brutal-divider: rgba(197, 208, 228, 0.16);
+}
+
+html[data-theme='candy'] {
+  --ink: rgba(167, 139, 250, 0.45);
+  --surface: #ffffff;
+  --brutal-bg: #f5f0ff;
+  --brutal-accent: #8b5cf6;
+  --brutal-accent-2: #ec4899;
+  --brutal-on-accent: #ffffff;
+  --text-primary: #1e1b4b;
+  --text-muted: #6b7280;
+  --brutal-shadow: 0 8px 30px rgba(124, 58, 237, 0.12), 0 2px 8px rgba(124, 58, 237, 0.05);
+  --brutal-shadow-sm: 0 4px 14px rgba(124, 58, 237, 0.08);
+  --brutal-shadow-lg: 0 16px 40px rgba(124, 58, 237, 0.16), 0 4px 12px rgba(124, 58, 237, 0.06);
+  --brutal-shadow-xl: 0 24px 50px rgba(124, 58, 237, 0.22);
+  --brutal-radius: 18px;
+  --brutal-radius-2xl: 24px;
+  --brutal-radius-full: 9999px;
+  --brutal-accent-light: rgba(167, 139, 250, 0.14);
+  --brutal-surface-2: #fbf9ff;
+  --brutal-success: #10b981;
+  --brutal-howto-bg: rgba(245, 240, 255, 0.85);
+  --brutal-divider: rgba(167, 139, 250, 0.2);
+
+  /* Tailwind HSL tokens -> candy light */
+  --background: 265 100% 98%;
+  --foreground: 243 47% 20%;
+  --card: 0 0% 100%;
+  --card-foreground: 243 47% 20%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 243 47% 20%;
+  --primary: 263 70% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 326 78% 95%;
+  --secondary-foreground: 330 81% 60%;
+  --muted: 265 50% 96%;
+  --muted-foreground: 240 5% 45%;
+  --accent: 263 70% 50%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 260 60% 90%;
+  --input: 260 60% 90%;
+  --ring: 263 70% 50%;
+  --radius: 1.1rem;
+  color-scheme: light;
 }
 
 /* Brutal (ruangmail.biz.id) default theme — light, hard borders, mono */
