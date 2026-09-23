@@ -338,7 +338,7 @@ export function HomePage({ initialAddress }: HomePageProps) {
       />
 
       {/* ========== FEATURES ========== */}
-      <section className="max-w-6xl mx-auto px-4 py-20">
+      <section className="max-w-6xl mx-auto px-4 py-20 features-section">
         <div className="grid md:grid-cols-3 gap-6">
           <Feature
             icon={<Zap className="h-6 w-6" />}
@@ -438,8 +438,8 @@ export function HomePage({ initialAddress }: HomePageProps) {
 
 function Feature({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <div className="brutal-card-lg" style={{ padding: '28px 24px', background: 'var(--surface)', textAlign: 'left' }}>
-      <div style={{ marginBottom: 16, padding: 12, borderRadius: 12, background: 'var(--brutal-bg)', border: '2px solid var(--ink)', display: 'inline-flex', color: 'var(--text-primary)' }}>
+    <div className="brutal-card-lg feature-card" style={{ padding: '28px 24px', background: 'var(--surface)', textAlign: 'left' }}>
+      <div className="feature-icon-badge" style={{ marginBottom: 16, padding: 12, borderRadius: 12, background: 'var(--brutal-bg)', border: '2px solid var(--ink)', display: 'inline-flex', color: 'var(--text-primary)' }}>
         {icon}
       </div>
       <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: 8, color: 'var(--text-primary)' }}>{title}</h3>

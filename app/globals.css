@@ -1004,14 +1004,118 @@ html[data-theme='candy'] .brutal-menu-dropdown a[href='/admin']:hover {
   background: rgba(124, 58, 237, 0.14) !important;
 }
 
-/* How-to cards */
-html[data-theme='candy'] .howto-step-card {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06) !important;
-  border-radius: 18px !important;
+/* ============================================================
+   CANDY THEME — COLORFUL HOMEPAGE BOTTOM CARDS (Features & How-to)
+   ============================================================ */
+
+/* 1. Features Section Cards (3 boxes) */
+html[data-theme='candy'] .feature-card {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.28) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.08) !important;
   position: relative !important;
   overflow: hidden !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+html[data-theme='candy'] .feature-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 14px 32px -4px rgba(124, 58, 237, 0.15) !important;
+}
+
+/* Feature Card Corner Blobs */
+html[data-theme='candy'] .feature-card::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  right: -24px;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  opacity: 0.3 !important;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  z-index: 2 !important;
+}
+
+html[data-theme='candy'] .feature-card:hover::before {
+  transform: scale(1.35);
+  opacity: 0.45 !important;
+}
+
+/* Feature Card 1 (Instant Access): Cyan / Sky Blue */
+html[data-theme='candy'] .features-section .grid > div:nth-child(1)::before {
+  background: #38bdf8 !important;
+}
+
+html[data-theme='candy'] .features-section .grid > div:nth-child(1) .feature-icon-badge {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(14, 165, 233, 0.12) 100%) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+  color: #0284c7 !important;
+  border-radius: 14px !important;
+}
+
+/* Feature Card 2 (Privacy First): Violet / Lavender */
+html[data-theme='candy'] .features-section .grid > div:nth-child(2)::before {
+  background: #a855f7 !important;
+}
+
+html[data-theme='candy'] .features-section .grid > div:nth-child(2) .feature-icon-badge {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(124, 58, 237, 0.12) 100%) !important;
+  border: 1.5px solid rgba(168, 85, 247, 0.4) !important;
+  color: #7c3aed !important;
+  border-radius: 14px !important;
+}
+
+/* Feature Card 3 (Custom Domains): Rose / Hot Pink */
+html[data-theme='candy'] .features-section .grid > div:nth-child(3)::before {
+  background: #ec4899 !important;
+}
+
+html[data-theme='candy'] .features-section .grid > div:nth-child(3) .feature-icon-badge {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(244, 63, 142, 0.12) 100%) !important;
+  border: 1.5px solid rgba(236, 72, 153, 0.4) !important;
+  color: #db2777 !important;
+  border-radius: 14px !important;
+}
+
+/* 2. How-To Section Outer Wrapper */
+html[data-theme='candy'] #cara-pakai-section > div > div {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.28) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 16px 40px -8px rgba(124, 58, 237, 0.08) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+html[data-theme='candy'] #cara-pakai-section > div > div::before {
+  content: '';
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f472b6, #a78bfa);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* How-To Step Cards: Vibrant Pastel Candy Cards */
+html[data-theme='candy'] .howto-step-card {
+  border-radius: 20px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+html[data-theme='candy'] .howto-step-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
 }
 
 html[data-theme='candy'] .howto-step-card::before {
@@ -1019,12 +1123,80 @@ html[data-theme='candy'] .howto-step-card::before {
   position: absolute;
   top: -20px;
   right: -20px;
-  width: 55px;
-  height: 55px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: #ede9fe;
-  opacity: 0.6;
+  opacity: 0.35 !important;
   pointer-events: none;
+  z-index: 2;
+  transition: transform 0.25s ease;
+}
+
+html[data-theme='candy'] .howto-step-card:hover::before {
+  transform: scale(1.35);
+}
+
+/* Step 01: Pastel Cyan / Sky Blue */
+html[data-theme='candy'] .howto-step-card:nth-child(1) {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(1)::before {
+  background: #38bdf8 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(1) [data-step-num] {
+  color: #0284c7 !important;
+  font-weight: 900 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(1) p:first-of-type {
+  color: #0c4a6e !important;
+  font-weight: 800 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(1) p:last-of-type {
+  color: #0369a1 !important;
+  opacity: 0.9 !important;
+}
+
+/* Step 02: Pastel Lavender / Purple */
+html[data-theme='candy'] .howto-step-card:nth-child(2) {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+  border: 1.5px solid rgba(168, 85, 247, 0.4) !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(2)::before {
+  background: #a855f7 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(2) [data-step-num] {
+  color: #7c3aed !important;
+  font-weight: 900 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(2) p:first-of-type {
+  color: #4c1d95 !important;
+  font-weight: 800 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(2) p:last-of-type {
+  color: #6d28d9 !important;
+  opacity: 0.9 !important;
+}
+
+/* Step 03: Pastel Rose / Coral Pink */
+html[data-theme='candy'] .howto-step-card:nth-child(3) {
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
+  border: 1.5px solid rgba(236, 72, 153, 0.4) !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(3)::before {
+  background: #ec4899 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(3) [data-step-num] {
+  color: #db2777 !important;
+  font-weight: 900 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(3) p:first-of-type {
+  color: #831843 !important;
+  font-weight: 800 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(3) p:last-of-type {
+  color: #be185d !important;
+  opacity: 0.9 !important;
 }
 
 /* Email list rows */
