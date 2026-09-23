@@ -139,7 +139,9 @@ export function HomePage({ initialAddress }: HomePageProps) {
             {/* Language Toggle */}
             <div className="language-toggle" style={{ display: 'flex', border: '2px solid var(--ink)', borderRadius: 8, overflow: 'hidden', boxShadow: 'var(--brutal-shadow-sm)', background: 'var(--surface)' }}>
               <button
+                type="button"
                 onClick={() => setLocale('en')}
+                data-active={locale === 'en'}
                 style={{
                   padding: '5px 11px',
                   border: 'none',
@@ -155,7 +157,9 @@ export function HomePage({ initialAddress }: HomePageProps) {
                 }}
               >EN</button>
               <button
+                type="button"
                 onClick={() => setLocale('id')}
+                data-active={locale === 'id'}
                 style={{
                   padding: '5px 11px',
                   border: 'none',

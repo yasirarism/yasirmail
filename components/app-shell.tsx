@@ -140,9 +140,11 @@ export function AppShell({ children, contentClassName = 'max-w-5xl' }: AppShellP
 
             <div className="flex items-center gap-2">
               {/* Language Toggle */}
-              <div style={{ display: 'flex', border: '2px solid var(--ink)', borderRadius: 8, overflow: 'hidden', boxShadow: 'var(--brutal-shadow-sm)', background: 'var(--surface)' }}>
+              <div className="language-toggle" style={{ display: 'flex', border: '2px solid var(--ink)', borderRadius: 8, overflow: 'hidden', boxShadow: 'var(--brutal-shadow-sm)', background: 'var(--surface)' }}>
                 <button
+                  type="button"
                   onClick={() => setLocale('en')}
+                  data-active={locale === 'en'}
                   style={{
                     padding: '5px 11px',
                     border: 'none',
@@ -158,7 +160,9 @@ export function AppShell({ children, contentClassName = 'max-w-5xl' }: AppShellP
                   }}
                 >EN</button>
                 <button
+                  type="button"
                   onClick={() => setLocale('id')}
+                  data-active={locale === 'id'}
                   style={{
                     padding: '5px 11px',
                     border: 'none',

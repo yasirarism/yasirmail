@@ -629,25 +629,59 @@ html[data-theme='candy'] header a[href='/'] div svg {
   color: #ffffff !important;
 }
 
+/* Language Toggle in Candy Theme */
 html[data-theme='candy'] header .language-toggle,
 html[data-theme='candy'] header [class*='language-toggle'] {
-  background: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(0, 0, 0, 0.22) !important;
   backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+  border-radius: 9999px !important;
+  padding: 3px !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+  display: inline-flex !important;
+  align-items: center !important;
 }
 
 html[data-theme='candy'] header .language-toggle button,
 html[data-theme='candy'] header [class*='language-toggle'] button {
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  border-radius: 9999px !important;
+  padding: 4px 10px !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+/* Active language pill: Solid White background with vibrant Purple text */
+html[data-theme='candy'] header .language-toggle button[data-active='true'] {
+  background: #ffffff !important;
+  color: #7c3aed !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Inactive language: Translucent white text */
+html[data-theme='candy'] header .language-toggle button[data-active='false'] {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+html[data-theme='candy'] header .language-toggle button[data-active='false']:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
   color: #ffffff !important;
 }
 
-html[data-theme='candy'] header button {
+/* Other header buttons (Theme Cycle, Menu) */
+html[data-theme='candy'] header button:not(.language-toggle button) {
   background: rgba(255, 255, 255, 0.2) !important;
   backdrop-filter: blur(8px) !important;
   border: 1px solid rgba(255, 255, 255, 0.35) !important;
   color: #ffffff !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 10px !important;
 }
 
 /* Cards */

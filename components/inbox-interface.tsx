@@ -242,12 +242,23 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
     doc.querySelectorAll('img').forEach((image) => {
       image.addEventListener('load', resize);
     });
+    doc.querySelectorAll('a').forEach((link) => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    });
     doc.addEventListener('click', (event) => {
       const target = event.target as HTMLElement | null;
       const code = target?.closest('[data-copy-code]')?.getAttribute('data-copy-code');
-      if (!code) return;
-      navigator.clipboard.writeText(code);
-      toast.success(`OTP copied: ${code}`);
+      if (code) {
+        navigator.clipboard.writeText(code);
+        toast.success(`OTP copied: ${code}`);
+        return;
+      }
+      const link = target?.closest('a');
+      if (link && link.href) {
+        event.preventDefault();
+        window.open(link.href, '_blank', 'noopener,noreferrer');
+      }
     });
   }, []);
 
