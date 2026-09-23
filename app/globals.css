@@ -1395,14 +1395,211 @@ html[data-theme='candy'] .text-emerald-200 {
   font-weight: 700 !important;
 }
 
-/* Admin Login Card Icon */
-html[data-theme='candy'] .brutal-card-lg div[style*='margin: 0 auto 16px'] {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%) !important;
-  border: 1.5px solid rgba(167, 139, 250, 0.4) !important;
+/* ============================================================
+   CANDY THEME — DARK AURORA GLASSMORPHIC LOGIN (Rekapanmu style)
+   ============================================================ */
+.login-bg-blobs {
+  display: none;
 }
 
-html[data-theme='candy'] .brutal-card-lg div[style*='margin: 0 auto 16px'] svg {
-  color: #7c3aed !important;
+html[data-theme='candy'] .login-bg-blobs {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+html[data-theme='candy'] .blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.38;
+  animation: blobFloat 8s ease-in-out infinite alternate;
+}
+
+html[data-theme='candy'] .blob-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #F472B6 0%, #EC4899 60%, transparent 80%);
+  top: -120px;
+  left: -120px;
+  animation-duration: 9s;
+}
+
+html[data-theme='candy'] .blob-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #A78BFA 0%, #7C3AED 60%, transparent 80%);
+  bottom: -80px;
+  right: -80px;
+  animation-duration: 11s;
+  animation-delay: -3s;
+}
+
+html[data-theme='candy'] .blob-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #22D3EE 0%, #0891B2 60%, transparent 80%);
+  top: 45%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  animation-duration: 7s;
+  animation-delay: -5s;
+}
+
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.05); }
+  66%  { transform: translate(-20px, 30px) scale(0.96); }
+  100% { transform: translate(15px, 15px) scale(1.03); }
+}
+
+/* Candy Theme Login Screen Container */
+html[data-theme='candy'] .login-screen-wrap {
+  background: linear-gradient(135deg, #1E1B4B 0%, #3B0764 40%, #1E3A5F 100%) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Hide brutal hero grid on candy login */
+html[data-theme='candy'] .login-screen-wrap .hero-grid {
+  display: none !important;
+}
+
+/* Candy Theme Login Card: Pure Frosted Glass */
+html[data-theme='candy'] .admin-login-card,
+html[data-theme='candy'] .homepage-lock-card {
+  position: relative !important;
+  z-index: 2 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(28px) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+/* Remove corner pink circle on login card in candy theme since it's dark glass */
+html[data-theme='candy'] .admin-login-card::before,
+html[data-theme='candy'] .homepage-lock-card::before {
+  display: none !important;
+}
+
+/* Logo Header */
+html[data-theme='candy'] .login-logo-header {
+  margin-bottom: 24px;
+}
+
+html[data-theme='candy'] .login-logo-icon {
+  margin-bottom: 8px;
+  animation: float 3s ease-in-out infinite;
+}
+
+html[data-theme='candy'] .login-logo-title {
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  background: linear-gradient(135deg, #F472B6, #A78BFA, #22D3EE) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  letter-spacing: 4px !important;
+  line-height: 1 !important;
+  margin-bottom: 4px !important;
+}
+
+html[data-theme='candy'] .login-logo-subtitle {
+  font-size: 11px !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  letter-spacing: 1px !important;
+  font-weight: 600 !important;
+}
+
+/* Welcome Headings */
+html[data-theme='candy'] .login-welcome-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  margin-bottom: 4px !important;
+}
+
+html[data-theme='candy'] .login-welcome-subtitle {
+  font-size: 13px !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  margin-bottom: 24px !important;
+}
+
+/* Labels */
+html[data-theme='candy'] .login-field-label {
+  display: block;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin-bottom: 8px !important;
+  letter-spacing: 0.8px !important;
+  text-align: left !important;
+}
+
+/* Glass Inputs */
+html[data-theme='candy'] .login-input {
+  width: 100% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  color: #ffffff !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+html[data-theme='candy'] .login-input::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+html[data-theme='candy'] .login-input:focus {
+  border-color: rgba(244, 114, 182, 0.7) !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2) !important;
+}
+
+/* Toggle eye button */
+html[data-theme='candy'] .toggle-pass-btn {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+html[data-theme='candy'] .toggle-pass-btn:hover {
+  color: #ffffff !important;
+}
+
+/* Submit Button: Multi-stop Aurora Gradient with Glow & Shift */
+html[data-theme='candy'] .login-submit-btn {
+  width: 100% !important;
+  padding: 13px !important;
+  background: linear-gradient(135deg, #F472B6 0%, #A78BFA 50%, #22D3EE 100%) !important;
+  background-size: 200% 200% !important;
+  animation: gradientShift 4s ease infinite !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 25px rgba(244, 114, 182, 0.4) !important;
+  letter-spacing: 0.3px !important;
+  transition: all 0.2s ease !important;
+}
+
+html[data-theme='candy'] .login-submit-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(244, 114, 182, 0.6) !important;
+  filter: brightness(1.05) !important;
+}
+
+/* Footer on Login */
+html[data-theme='candy'] .login-footer {
+  color: rgba(255, 255, 255, 0.45) !important;
+  font-weight: 500 !important;
 }
 
 /* ============================================================
