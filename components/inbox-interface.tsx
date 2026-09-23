@@ -1236,9 +1236,10 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
           <>
             <div className="fixed inset-0 z-[90]" onClick={() => setShowHistory(false)} />
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.08, ease: 'easeOut' }}
               style={{ position: 'fixed', zIndex: 100, top: 80, right: 24 }}
             >
               <div style={{ width: 'min(22rem, calc(100vw - 48px))', borderRadius: 14, border: '2px solid var(--ink)', background: 'var(--surface)', boxShadow: 'var(--brutal-shadow-lg)', overflow: 'hidden' }}>
@@ -1341,9 +1342,10 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
             onClick={() => setShowQrModal(false)}
           >
             <motion.div
-              initial={{ scale: 0.92, opacity: 0 }}
+              initial={{ scale: 0.96, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.08, ease: 'easeOut' }}
               onClick={(e) => e.stopPropagation()}
               className="brutal-card-lg"
               style={{
