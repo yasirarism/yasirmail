@@ -1039,6 +1039,48 @@ html[data-theme='candy'] .brutal-menu-dropdown a:hover {
   color: #7c3aed !important;
 }
 
+/* Hamburger Dropdown ThemePicker & Text Styling */
+html[data-theme='candy'] .brutal-menu-dropdown .theme-option-label,
+html[data-theme='candy'] .brutal-menu-dropdown span.text-white\/80,
+html[data-theme='candy'] .brutal-menu-dropdown span.text-white,
+html[data-theme='candy'] .theme-option-label {
+  color: #1e1b4b !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme='candy'] .theme-picker-title,
+html[data-theme='candy'] .brutal-menu-dropdown .theme-picker-title,
+html[data-theme='candy'] .brutal-menu-dropdown p.text-white\/50 {
+  color: #64748b !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme='candy'] .brutal-menu-dropdown button:has([class*='theme-preview']) {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.25) !important;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.04) !important;
+  border-radius: 12px !important;
+  transition: all 0.15s ease !important;
+}
+
+html[data-theme='candy'] .brutal-menu-dropdown button:has([class*='theme-preview']):hover {
+  background: #faf7ff !important;
+  border-color: rgba(167, 139, 250, 0.5) !important;
+}
+
+html[data-theme='candy'] .brutal-menu-dropdown button.ring-2,
+html[data-theme='candy'] .brutal-menu-dropdown button.ring-blue-400\/70 {
+  border-color: #8b5cf6 !important;
+  background: rgba(139, 92, 246, 0.08) !important;
+  box-shadow: 0 0 0 2px #8b5cf6 !important;
+}
+
+html[data-theme='candy'] .brutal-menu-dropdown button.ring-2 .theme-option-label,
+html[data-theme='candy'] .brutal-menu-dropdown button.ring-blue-400\/70 .theme-option-label {
+  color: #7c3aed !important;
+  font-weight: 800 !important;
+}
+
 /* Menu Admin in dropdown: soft purple accent */
 html[data-theme='candy'] .brutal-menu-dropdown a[href='/admin'] {
   color: #7c3aed !important;
@@ -1272,8 +1314,8 @@ html[data-theme='candy'] .text-blue-200 {
   color: var(--text-primary) !important;
 }
 
-html[data-theme='candy'] header .text-white,
-html[data-theme='candy'] header .text-white\/80,
+html[data-theme='candy'] header .text-white:not(.brutal-menu-dropdown *),
+html[data-theme='candy'] header .text-white\/80:not(.brutal-menu-dropdown *),
 html[data-theme='candy'] .brutal-btn-accent,
 html[data-theme='candy'] .brutal-btn-accent *,
 html[data-theme='candy'] .brutal-btn-accent2,

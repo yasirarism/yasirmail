@@ -243,7 +243,7 @@ export function AppShell({ children, contentClassName = 'max-w-5xl' }: AppShellP
                           right: 0,
                           zIndex: 50,
                           marginTop: 8,
-                          width: 240,
+                          width: 260,
                           borderRadius: 14,
                           border: '2px solid var(--ink)',
                           background: 'var(--surface)',

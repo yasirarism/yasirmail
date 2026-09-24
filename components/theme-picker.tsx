@@ -16,13 +16,13 @@ export function ThemePicker({ t, compact = false }: ThemePickerProps) {
     <div className={cn('space-y-2', compact ? 'px-2 pb-1' : 'space-y-3')}>
       <p
         className={cn(
-          'font-semibold uppercase tracking-[0.2em] text-white/50',
+          'theme-picker-title font-semibold uppercase tracking-[0.2em] text-white/50',
           compact ? 'px-1 text-[10px]' : 'text-xs'
         )}
       >
         {t.themeLabel}
       </p>
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className={cn('grid gap-2', compact ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-4')}>
         <ThemeOption
           active={theme === 'brutal'}
           label={t.themeBrutal}
@@ -84,7 +84,7 @@ function ThemeOption({
                 : 'theme-preview-candy'
         )}
       />
-      <span className="block text-[11px] font-semibold text-white/80">{label}</span>
+      <span className="theme-option-label block text-[11px] font-semibold text-white/80 leading-tight break-words">{label}</span>
     </button>
   );
 }
