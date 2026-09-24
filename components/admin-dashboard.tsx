@@ -67,7 +67,8 @@ type ThemeSettings = {
 const THEME_OPTIONS: { value: VisualTheme; label: string; preview: string; desc: string }[] = [
   { value: 'brutal', label: 'Neo Brutal', preview: 'theme-preview-brutal', desc: 'RuangMail style (light)' },
   { value: 'glass', label: 'Glassmorphism', preview: 'theme-preview-glass', desc: 'Glassmorphism + blur' },
-  { value: 'neomorph', label: 'Neomorph', preview: 'theme-preview-neomorph', desc: 'Soft UI neomorph' }
+  { value: 'neomorph', label: 'Neomorph', preview: 'theme-preview-neomorph', desc: 'Soft UI neomorph' },
+  { value: 'candy', label: 'Candy Aurora', preview: 'theme-preview-candy', desc: 'Soft pastel + aurora glow' }
 ];
 
 const normalizeThemeSetting = (value: unknown): VisualTheme =>

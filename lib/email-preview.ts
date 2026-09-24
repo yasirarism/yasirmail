@@ -46,6 +46,10 @@ const sanitizeEmailHtml = (html: string) => {
       }
     });
   });
+  doc.querySelectorAll('a').forEach((node) => {
+    node.setAttribute('target', '_blank');
+    node.setAttribute('rel', 'noopener noreferrer');
+  });
   return doc;
 };
 
@@ -131,6 +135,11 @@ export const buildGmailPreviewDocument = (
   const style = parsed.createElement('style');
   style.textContent = GMAIL_RESET;
   parsed.head.prepend(style);
+  if (!parsed.querySelector('base')) {
+    const base = parsed.createElement('base');
+    base.setAttribute('target', '_blank');
+    parsed.head.prepend(base);
+  }
   if (!parsed.querySelector('meta[charset]')) {
     const charset = parsed.createElement('meta');
     charset.setAttribute('charset', 'utf-8');

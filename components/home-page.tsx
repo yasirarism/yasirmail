@@ -2,7 +2,7 @@
 
 import { InboxInterface } from "@/components/inbox-interface";
 import { Starfield } from "@/components/starfield";
-import { Menu, Zap, Shield, Globe, Code2, Mail, Sun, Moon, Github, Wrench, Send } from "lucide-react";
+import { Menu, Zap, Shield, Globe, Code2, Mail, Sun, Moon, Sparkles, Github, Wrench, Send } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
@@ -139,7 +139,9 @@ export function HomePage({ initialAddress }: HomePageProps) {
             {/* Language Toggle */}
             <div className="language-toggle" style={{ display: 'flex', border: '2px solid var(--ink)', borderRadius: 8, overflow: 'hidden', boxShadow: 'var(--brutal-shadow-sm)', background: 'var(--surface)' }}>
               <button
+                type="button"
                 onClick={() => setLocale('en')}
+                data-active={locale === 'en'}
                 style={{
                   padding: '5px 11px',
                   border: 'none',
@@ -155,7 +157,9 @@ export function HomePage({ initialAddress }: HomePageProps) {
                 }}
               >EN</button>
               <button
+                type="button"
                 onClick={() => setLocale('id')}
+                data-active={locale === 'id'}
                 style={{
                   padding: '5px 11px',
                   border: 'none',
@@ -192,6 +196,8 @@ export function HomePage({ initialAddress }: HomePageProps) {
             >
               {theme === 'brutal' ? (
                 <Sun className="h-4 w-4" />
+              ) : theme === 'candy' ? (
+                <Sparkles className="h-4 w-4" />
               ) : (
                 <Moon className="h-4 w-4" />
               )}
@@ -225,9 +231,10 @@ export function HomePage({ initialAddress }: HomePageProps) {
                     <div className="fixed inset-0 z-40" onClick={() => setShowMenu(false)} />
                     <motion.div
                       className="brutal-menu-dropdown"
-                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                      initial={{ opacity: 0, y: -4, scale: 0.97 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                      exit={{ opacity: 0, y: -4, scale: 0.97 }}
+                      transition={{ duration: 0.08, ease: 'easeOut' }}
                       style={{
                         position: 'absolute',
                         right: 0,
@@ -331,7 +338,7 @@ export function HomePage({ initialAddress }: HomePageProps) {
       />
 
       {/* ========== FEATURES ========== */}
-      <section className="max-w-6xl mx-auto px-4 py-20">
+      <section className="max-w-6xl mx-auto px-4 py-20 features-section">
         <div className="grid md:grid-cols-3 gap-6">
           <Feature
             icon={<Zap className="h-6 w-6" />}
@@ -431,8 +438,8 @@ export function HomePage({ initialAddress }: HomePageProps) {
 
 function Feature({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <div className="brutal-card-lg" style={{ padding: '28px 24px', background: 'var(--surface)', textAlign: 'left' }}>
-      <div style={{ marginBottom: 16, padding: 12, borderRadius: 12, background: 'var(--brutal-bg)', border: '2px solid var(--ink)', display: 'inline-flex', color: 'var(--text-primary)' }}>
+    <div className="brutal-card-lg feature-card" style={{ padding: '28px 24px', background: 'var(--surface)', textAlign: 'left' }}>
+      <div className="feature-icon-badge" style={{ marginBottom: 16, padding: 12, borderRadius: 12, background: 'var(--brutal-bg)', border: '2px solid var(--ink)', display: 'inline-flex', color: 'var(--text-primary)' }}>
         {icon}
       </div>
       <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: 8, color: 'var(--text-primary)' }}>{title}</h3>

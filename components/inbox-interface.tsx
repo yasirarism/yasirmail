@@ -242,12 +242,23 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
     doc.querySelectorAll('img').forEach((image) => {
       image.addEventListener('load', resize);
     });
+    doc.querySelectorAll('a').forEach((link) => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    });
     doc.addEventListener('click', (event) => {
       const target = event.target as HTMLElement | null;
       const code = target?.closest('[data-copy-code]')?.getAttribute('data-copy-code');
-      if (!code) return;
-      navigator.clipboard.writeText(code);
-      toast.success(`OTP copied: ${code}`);
+      if (code) {
+        navigator.clipboard.writeText(code);
+        toast.success(`OTP copied: ${code}`);
+        return;
+      }
+      const link = target?.closest('a');
+      if (link && link.href) {
+        event.preventDefault();
+        window.open(link.href, '_blank', 'noopener,noreferrer');
+      }
     });
   }, []);
 
@@ -805,7 +816,7 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
           <button
             type="button"
             onClick={copyAddress}
-            className="brutal-btn"
+            className={copiedAddress ? 'brutal-btn brutal-btn-copied' : 'brutal-btn brutal-btn-accent'}
             style={{
               flex: 1,
               padding: '12px 14px',
@@ -817,7 +828,7 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
               alignItems: 'center',
               justifyContent: 'center',
               gap: 8,
-              transition: 'background 0.18s',
+              transition: 'background 0.18s, color 0.18s',
             }}
           >
             {copiedAddress ? <Check className="h-4 w-4 shrink-0" /> : <Copy className="h-4 w-4 shrink-0" />}
@@ -1236,9 +1247,10 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
           <>
             <div className="fixed inset-0 z-[90]" onClick={() => setShowHistory(false)} />
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.08, ease: 'easeOut' }}
               style={{ position: 'fixed', zIndex: 100, top: 80, right: 24 }}
             >
               <div style={{ width: 'min(22rem, calc(100vw - 48px))', borderRadius: 14, border: '2px solid var(--ink)', background: 'var(--surface)', boxShadow: 'var(--brutal-shadow-lg)', overflow: 'hidden' }}>
@@ -1341,9 +1353,10 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
             onClick={() => setShowQrModal(false)}
           >
             <motion.div
-              initial={{ scale: 0.92, opacity: 0 }}
+              initial={{ scale: 0.96, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.08, ease: 'easeOut' }}
               onClick={(e) => e.stopPropagation()}
               className="brutal-card-lg"
               style={{

@@ -143,12 +143,12 @@ function RefundCalculatorContent() {
         <div className="grid gap-4 md:grid-cols-[1fr_1fr]">
           <div className="flex flex-col items-center justify-center gap-3">
             <div
-              className="h-32 w-32 rounded-full border border-white/10 bg-white/5 flex items-center justify-center"
+              className="refund-chart-track h-32 w-32 rounded-full border border-white/10 bg-white/5 flex items-center justify-center transition-all duration-300"
               style={{
-                background: `conic-gradient(#34d399 ${refundPercentage}%, rgba(255,255,255,0.1) 0)`,
+                background: `conic-gradient(#10b981 ${refundPercentage}%, rgba(167, 139, 250, 0.22) 0)`,
               }}
             >
-              <div className="h-24 w-24 rounded-full bg-slate-950/80 flex flex-col items-center justify-center text-center">
+              <div className="refund-chart-hole h-24 w-24 rounded-full bg-slate-950/80 flex flex-col items-center justify-center text-center">
                 <span className="text-xs text-white/60">{t.refundRefundLabel}</span>
                 <span className="text-lg font-semibold text-white">
                   {refundPercentage.toFixed(1)}%

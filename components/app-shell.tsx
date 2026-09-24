@@ -11,7 +11,7 @@ import {
   type ReactNode,
 } from 'react';
 import Link from 'next/link';
-import { Code2, Mail, Menu, Shield, Sun, Moon, Wrench, Github } from 'lucide-react';
+import { Code2, Mail, Menu, Shield, Sun, Moon, Sparkles, Wrench, Github } from 'lucide-react';
 
 import { ThemePicker } from '@/components/theme-picker';
 import { Starfield } from '@/components/starfield';
@@ -140,9 +140,11 @@ export function AppShell({ children, contentClassName = 'max-w-5xl' }: AppShellP
 
             <div className="flex items-center gap-2">
               {/* Language Toggle */}
-              <div style={{ display: 'flex', border: '2px solid var(--ink)', borderRadius: 8, overflow: 'hidden', boxShadow: 'var(--brutal-shadow-sm)', background: 'var(--surface)' }}>
+              <div className="language-toggle" style={{ display: 'flex', border: '2px solid var(--ink)', borderRadius: 8, overflow: 'hidden', boxShadow: 'var(--brutal-shadow-sm)', background: 'var(--surface)' }}>
                 <button
+                  type="button"
                   onClick={() => setLocale('en')}
+                  data-active={locale === 'en'}
                   style={{
                     padding: '5px 11px',
                     border: 'none',
@@ -158,7 +160,9 @@ export function AppShell({ children, contentClassName = 'max-w-5xl' }: AppShellP
                   }}
                 >EN</button>
                 <button
+                  type="button"
                   onClick={() => setLocale('id')}
+                  data-active={locale === 'id'}
                   style={{
                     padding: '5px 11px',
                     border: 'none',
@@ -193,7 +197,13 @@ export function AppShell({ children, contentClassName = 'max-w-5xl' }: AppShellP
                   transition: 'transform 0.12s, box-shadow 0.12s',
                 }}
               >
-                {theme === 'brutal' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {theme === 'brutal' ? (
+                  <Sun className="h-4 w-4" />
+                ) : theme === 'candy' ? (
+                  <Sparkles className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
               </button>
 
               {/* Menu */}
@@ -224,9 +234,10 @@ export function AppShell({ children, contentClassName = 'max-w-5xl' }: AppShellP
                       <div className="fixed inset-0 z-40" onClick={() => setShowMenu(false)} />
                       <motion.div
                         className="brutal-menu-dropdown"
-                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                        initial={{ opacity: 0, y: -4, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                        exit={{ opacity: 0, y: -4, scale: 0.97 }}
+                        transition={{ duration: 0.08, ease: 'easeOut' }}
                         style={{
                           position: 'absolute',
                           right: 0,

@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Code2 } from 'lucide-react';
+import { Check, Code2, Copy } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { AppShell, useAppChrome } from '@/components/app-shell';
 import { Button } from '@/components/ui/button';
@@ -15,10 +16,11 @@ export function UrlCodecPage() {
 }
 
 function UrlCodecContent() {
-  const { t } = useAppChrome();
+  const { t, locale } = useAppChrome();
   const [inputValue, setInputValue] = useState('');
   const [outputValue, setOutputValue] = useState('');
   const [error, setError] = useState('');
+  const [copied, setCopied] = useState(false);
 
   const handleEncode = () => {
     setError('');
@@ -33,6 +35,18 @@ function UrlCodecContent() {
     } catch {
       setError(t.urlCodecInvalid);
       setOutputValue('');
+    }
+  };
+
+  const handleCopyResult = async () => {
+    if (!outputValue) return;
+    try {
+      await navigator.clipboard.writeText(outputValue);
+      setCopied(true);
+      toast.success(locale === 'id' ? 'Hasil berhasil disalin!' : 'Result copied to clipboard!');
+      window.setTimeout(() => setCopied(false), 1500);
+    } catch {
+      toast.error(locale === 'id' ? 'Gagal menyalin' : 'Failed to copy');
     }
   };
 
@@ -66,9 +80,21 @@ function UrlCodecContent() {
       </div>
 
       <div className="rounded-xl border border-white/10 bg-black/40 p-4 space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-          {t.urlCodecResultLabel}
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+            {t.urlCodecResultLabel}
+          </p>
+          {outputValue && (
+            <button
+              type="button"
+              onClick={handleCopyResult}
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-sm transition"
+            >
+              {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+              <span>{copied ? (locale === 'id' ? 'Tersalin!' : 'Copied!') : (locale === 'id' ? 'Salin Hasil' : 'Copy Result')}</span>
+            </button>
+          )}
+        </div>
         <textarea
           value={outputValue}
           readOnly

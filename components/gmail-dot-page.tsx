@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Copy, MailPlus } from 'lucide-react';
+import { Check, Copy, MailPlus } from 'lucide-react';
 
 import { AppShell, useAppChrome } from '@/components/app-shell';
 import { Input } from '@/components/ui/input';
@@ -44,9 +44,10 @@ export function GmailDotPage() {
 }
 
 function GmailDotContent() {
-  const { t } = useAppChrome();
+  const { t, locale } = useAppChrome();
   const [inputValue, setInputValue] = useState('');
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
+  const [copiedAll, setCopiedAll] = useState(false);
 
   const localPart = useMemo(() => normalizeLocalPart(inputValue), [inputValue]);
   const variants = useMemo(() => buildVariants(localPart), [localPart]);
@@ -58,6 +59,18 @@ function GmailDotContent() {
       window.setTimeout(() => setCopyStatus(null), 1200);
     } catch {
       setCopyStatus(null);
+    }
+  };
+
+  const handleCopyAll = async () => {
+    if (!variants.length) return;
+    try {
+      const allText = variants.map((v) => `${v}@gmail.com`).join('\n');
+      await navigator.clipboard.writeText(allText);
+      setCopiedAll(true);
+      window.setTimeout(() => setCopiedAll(false), 1500);
+    } catch {
+      setCopiedAll(false);
     }
   };
 
@@ -87,29 +100,45 @@ function GmailDotContent() {
       </div>
 
       <div className="rounded-xl border border-white/10 bg-black/40 p-4 space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-          {t.gmailDotResultsLabel}
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+            {t.gmailDotResultsLabel} {localPart ? `(${variants.length})` : ''}
+          </p>
+          {localPart && variants.length > 0 && (
+            <button
+              type="button"
+              onClick={handleCopyAll}
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-sm transition"
+            >
+              {copiedAll ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+              <span>{copiedAll ? (locale === 'id' ? 'Semua Tersalin!' : 'All Copied!') : (locale === 'id' ? 'Salin Semua' : 'Copy All')}</span>
+            </button>
+          )}
+        </div>
         {localPart ? (
           <div className="grid gap-2 sm:grid-cols-2">
             {variants.map((variant) => {
               const full = `${variant}@gmail.com`;
+              const isCopied = copyStatus === full;
               return (
                 <div
                   key={full}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2"
+                  className="flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 min-w-0"
                 >
-                  <span className="font-mono text-xs text-white/80 truncate">{full}</span>
+                  <span className="font-mono text-xs text-white/80 truncate flex-1 min-w-0">{full}</span>
                   <button
                     type="button"
                     onClick={() => handleCopy(full)}
                     className={cn(
-                      'inline-flex items-center gap-1 rounded-md border border-white/10 px-2 py-1 text-[10px] font-semibold',
-                      copyStatus === full ? 'bg-white/20 text-white' : 'bg-white/10 text-white/70'
+                      'shrink-0 inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-all',
+                      isCopied
+                        ? 'bg-emerald-500 text-white border-emerald-500 shadow-sm'
+                        : 'bg-white/10 hover:bg-white/20 text-white/80 border-white/10'
                     )}
+                    style={{ whiteSpace: 'nowrap' }}
                   >
-                    <Copy className="h-3 w-3" />
-                    {copyStatus === full ? t.gmailDotCopied : t.gmailDotCopy}
+                    {isCopied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                    <span>{isCopied ? (locale === 'id' ? 'Tersalin' : t.gmailDotCopied) : t.gmailDotCopy}</span>
                   </button>
                 </div>
               );

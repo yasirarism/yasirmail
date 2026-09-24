@@ -92,6 +92,12 @@
   box-shadow: 4px 4px 0 #1a1a1a;
 }
 
+.theme-preview-candy {
+  background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(167, 139, 250, 0.35);
+}
+
 /* Full neomorph template */
 html[data-theme='neomorph'] {
   /* Keep the HSL tokens in sync with --neo-bg so popups/cards that use
@@ -582,6 +588,1297 @@ html[data-theme='neomorph'] .howto-step-card p {
 }
 
 /* ============================================================
+   CANDY THEME — Soft pastel, aurora glow, rounded bento cards
+   ============================================================ */
+html[data-theme='candy'],
+html[data-theme='candy'] body,
+html[data-theme='candy'] main {
+  background: 
+    radial-gradient(circle at 10% 15%, rgba(244, 114, 182, 0.16) 0%, transparent 40%),
+    radial-gradient(circle at 85% 25%, rgba(34, 211, 238, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(167, 139, 250, 0.15) 0%, transparent 50%),
+    #f5f0ff !important;
+  color: var(--text-primary);
+}
+
+/* Aurora Blobs */
+html[data-theme='candy'] .theme-blob {
+  display: block !important;
+  filter: blur(60px);
+  opacity: 0.65;
+}
+
+/* Header Navbar: purple to pink gradient */
+html[data-theme='candy'] header {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.18) !important;
+}
+
+html[data-theme='candy'] header a[href='/'] {
+  color: #ffffff !important;
+}
+
+html[data-theme='candy'] header a[href='/'] div {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(8px) !important;
+  color: #ffffff !important;
+}
+
+html[data-theme='candy'] header a[href='/'] div svg {
+  color: #ffffff !important;
+}
+
+/* Language Toggle in Candy Theme */
+html[data-theme='candy'] header .language-toggle,
+html[data-theme='candy'] header [class*='language-toggle'] {
+  background: rgba(0, 0, 0, 0.22) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+  border-radius: 9999px !important;
+  padding: 3px !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+html[data-theme='candy'] header .language-toggle button,
+html[data-theme='candy'] header [class*='language-toggle'] button {
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  border-radius: 9999px !important;
+  padding: 4px 10px !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+/* Active language pill: Solid White background with vibrant Purple text */
+html[data-theme='candy'] header .language-toggle button[data-active='true'] {
+  background: #ffffff !important;
+  color: #7c3aed !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Inactive language: Translucent white text */
+html[data-theme='candy'] header .language-toggle button[data-active='false'] {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+html[data-theme='candy'] header .language-toggle button[data-active='false']:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+}
+
+/* Other header buttons (Theme Cycle, Menu) */
+html[data-theme='candy'] header button:not(.language-toggle button) {
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 10px !important;
+}
+
+/* Cards */
+html[data-theme='candy'] .brutal-card {
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 10px 32px rgba(124, 58, 237, 0.08), 0 2px 6px rgba(124, 58, 237, 0.04) !important;
+  border-radius: var(--brutal-radius-2xl) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+html[data-theme='candy'] .brutal-card-lg {
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 10px 32px rgba(124, 58, 237, 0.08), 0 2px 6px rgba(124, 58, 237, 0.04) !important;
+  border-radius: var(--brutal-radius-2xl) !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Corner Blob Ornament (inspired by Rekapanmu stat cards) */
+html[data-theme='candy'] .brutal-card-lg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 58px;
+  height: 58px;
+  border-top-right-radius: calc(var(--brutal-radius-2xl) - 1.5px);
+  border-bottom-left-radius: 100%;
+  background: #f472b6 !important;
+  opacity: 0.38 !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2 !important;
+}
+
+html[data-theme='candy'] .brutal-card-lg:hover::before {
+  transform: scale(1.25);
+  opacity: 0.5 !important;
+}
+
+html[data-theme='candy'] .brutal-card::before {
+  content: '';
+  position: absolute;
+  top: -22px;
+  right: -22px;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  opacity: 0.28;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  pointer-events: none;
+}
+
+html[data-theme='candy'] .brutal-card:hover::before {
+  transform: scale(1.4);
+  opacity: 0.42;
+}
+
+/* Stat Cards: different pastel colored corner blobs! */
+html[data-theme='candy'] div[style*='gridTemplateColumns'] > div:nth-child(1) .brutal-card::before,
+html[data-theme='candy'] .brutal-card:nth-of-type(1)::before {
+  background: #38bdf8 !important;
+}
+
+html[data-theme='candy'] div[style*='gridTemplateColumns'] > div:nth-child(2) .brutal-card::before,
+html[data-theme='candy'] .brutal-card:nth-of-type(2)::before {
+  background: #a78bfa !important;
+}
+
+html[data-theme='candy'] div[style*='gridTemplateColumns'] > div:nth-child(3) .brutal-card::before,
+html[data-theme='candy'] .brutal-card:nth-of-type(3)::before {
+  background: #ec4899 !important;
+}
+
+/* Buttons */
+/* Copy Address & Primary Action: Vibrant Pink/Magenta Gradient */
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-accent)']:not([style*='var(--brutal-accent-2)']) {
+  background: linear-gradient(135deg, #f43f8e 0%, #ec4899 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px -2px rgba(244, 63, 142, 0.45) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-accent)']:not([style*='var(--brutal-accent-2)']):hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 28px -2px rgba(244, 63, 142, 0.6) !important;
+  filter: brightness(1.05) !important;
+}
+
+/* Copied Address state: Emerald Green Gradient */
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-success)'] {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px -2px rgba(16, 185, 129, 0.45) !important;
+  border-radius: 9999px !important;
+}
+
+/* New Email Button: Soft Cyan Tint */
+html[data-theme='candy'] .brutal-card-lg button:has(svg.lucide-refresh-cw) {
+  background: rgba(14, 165, 233, 0.08) !important;
+  border: 1.5px solid rgba(14, 165, 233, 0.45) !important;
+  color: #0284c7 !important;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.15) !important;
+  border-radius: 9999px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-card-lg button:has(svg.lucide-refresh-cw):hover {
+  background: rgba(14, 165, 233, 0.18) !important;
+  border-color: #0ea5e9 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.28) !important;
+}
+
+/* QR Code Button: Soft Purple Tint */
+html[data-theme='candy'] .brutal-card-lg button:has(svg.lucide-qr-code) {
+  background: rgba(167, 139, 250, 0.08) !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.45) !important;
+  color: #7c3aed !important;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12) !important;
+  border-radius: 9999px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-card-lg button:has(svg.lucide-qr-code):hover {
+  background: rgba(167, 139, 250, 0.18) !important;
+  border-color: #8b5cf6 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.22) !important;
+}
+
+/* Settings Button on Email Card */
+html[data-theme='candy'] .brutal-card-lg button:has(svg.lucide-settings-2) {
+  background: rgba(167, 139, 250, 0.12) !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.35) !important;
+  color: #7c3aed !important;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.06) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  transition: all 0.15s ease !important;
+}
+
+html[data-theme='candy'] .brutal-card-lg button:has(svg.lucide-settings-2):hover {
+  background: rgba(167, 139, 250, 0.22) !important;
+  border-color: #8b5cf6 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Inbox Refresh Button */
+html[data-theme='candy'] .brutal-btn-white:has(svg.lucide-refresh-cw) {
+  background: rgba(16, 185, 129, 0.08) !important;
+  border: 1.5px solid rgba(16, 185, 129, 0.4) !important;
+  color: #059669 !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.14) !important;
+  border-radius: 9999px !important;
+  transition: all 0.15s ease !important;
+}
+
+html[data-theme='candy'] .brutal-btn-white:has(svg.lucide-refresh-cw):hover {
+  background: rgba(16, 185, 129, 0.18) !important;
+  border-color: #10b981 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* History Button */
+html[data-theme='candy'] button[title*='Riwayat'],
+html[data-theme='candy'] button[title*='History'] {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.35) !important;
+  color: #7c3aed !important;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.08) !important;
+  border-radius: 10px !important;
+}
+
+/* Base brutal-btn: white pill ONLY for non-accent/non-success buttons */
+html[data-theme='candy'] .brutal-btn:not(.brutal-btn-accent):not(.brutal-btn-accent2):not(.brutal-btn-copied):not([style*='var(--brutal-success)']),
+html[data-theme='candy'] .brutal-btn-white,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)'] {
+  background: #ffffff !important;
+  border: 1px solid rgba(167, 139, 250, 0.35) !important;
+  color: #1e1b4b !important;
+  box-shadow: 0 3px 12px rgba(124, 58, 237, 0.08) !important;
+  border-radius: 9999px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn:not(.brutal-btn-accent):not(.brutal-btn-accent2):not(.brutal-btn-copied):not([style*='var(--brutal-success)']):hover,
+html[data-theme='candy'] .brutal-btn-white:hover,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)']:hover {
+  background: #faf7ff !important;
+  border-color: rgba(167, 139, 250, 0.6) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 5px 16px rgba(124, 58, 237, 0.14) !important;
+}
+
+/* Copied State Button: Radiant Emerald Green Gradient with Pure White Text */
+html[data-theme='candy'] .brutal-btn.brutal-btn-copied,
+html[data-theme='candy'] .brutal-btn-copied,
+html[data-theme='candy'] button[style*='var(--brutal-success)'],
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-success)'] {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px -2px rgba(16, 185, 129, 0.5) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn-copied,
+html[data-theme='candy'] .brutal-btn-copied *,
+html[data-theme='candy'] button[style*='var(--brutal-success)'],
+html[data-theme='candy'] button[style*='var(--brutal-success)'] *,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-success)'],
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-success)'] * {
+  color: #ffffff !important;
+}
+
+/* Accent Buttons: ALWAYS Pink/Magenta gradient with WHITE text */
+html[data-theme='candy'] .brutal-btn.brutal-btn-accent,
+html[data-theme='candy'] .brutal-btn-accent,
+html[data-theme='candy'] a.brutal-btn-accent,
+html[data-theme='candy'] button.brutal-btn-accent {
+  background: linear-gradient(135deg, #f43f8e 0%, #ec4899 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px -2px rgba(236, 72, 153, 0.45) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn.brutal-btn-accent:hover,
+html[data-theme='candy'] .brutal-btn-accent:hover,
+html[data-theme='candy'] a.brutal-btn-accent:hover,
+html[data-theme='candy'] button.brutal-btn-accent:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px -2px rgba(236, 72, 153, 0.6) !important;
+  filter: brightness(1.05) !important;
+}
+
+html[data-theme='candy'] .brutal-btn-accent,
+html[data-theme='candy'] .brutal-btn-accent *,
+html[data-theme='candy'] a.brutal-btn-accent,
+html[data-theme='candy'] a.brutal-btn-accent *,
+html[data-theme='candy'] button.brutal-btn-accent,
+html[data-theme='candy'] button.brutal-btn-accent * {
+  color: #ffffff !important;
+}
+
+/* Secondary Accent Buttons: Cyan to Blue gradient with WHITE text */
+html[data-theme='candy'] .brutal-btn.brutal-btn-accent2,
+html[data-theme='candy'] .brutal-btn-accent2,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-accent-2)'] {
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.28) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn-accent2,
+html[data-theme='candy'] .brutal-btn-accent2 * {
+  color: #ffffff !important;
+}
+
+/* Address bar container */
+html[data-theme='candy'] div[style*='marginBottom: 12'] {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.35) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06) !important;
+}
+
+html[data-theme='candy'] div[style*='marginBottom: 12']:focus-within {
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+}
+
+/* Domain selector trigger */
+html[data-theme='candy'] div[style*='flexShrink: 0'] button[type='button'] {
+  background: rgba(167, 139, 250, 0.1) !important;
+  border: 1px solid rgba(167, 139, 250, 0.2) !important;
+  border-radius: 10px !important;
+  color: var(--text-primary) !important;
+  padding: 6px 12px !important;
+  margin-right: 6px !important;
+}
+
+/* Inputs & Chips */
+html[data-theme='candy'] .brutal-input {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.35) !important;
+  border-radius: 14px !important;
+  color: #1e1b4b !important;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.05) !important;
+}
+
+html[data-theme='candy'] .brutal-input:focus {
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+}
+
+html[data-theme='candy'] .brutal-chip {
+  background: rgba(167, 139, 250, 0.18) !important;
+  color: #7c3aed !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+}
+
+/* Dropdown menus & dialogs */
+html[data-theme='candy'] .domain-menu-panel {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.28) !important;
+  box-shadow: 0 20px 45px -8px rgba(124, 58, 237, 0.22), 0 6px 16px rgba(124, 58, 237, 0.08) !important;
+  border-radius: 16px !important;
+  z-index: 100 !important;
+}
+
+html[data-theme='candy'] .brutal-menu-dropdown {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.28) !important;
+  box-shadow: 0 16px 40px -8px rgba(124, 58, 237, 0.16), 0 4px 12px rgba(124, 58, 237, 0.06) !important;
+  border-radius: 16px !important;
+}
+
+html[data-theme='candy'] .brutal-menu-dropdown a {
+  transition: background 0.1s ease, color 0.1s ease !important;
+}
+
+html[data-theme='candy'] .brutal-menu-dropdown a:hover {
+  background: rgba(167, 139, 250, 0.12) !important;
+  color: #7c3aed !important;
+}
+
+/* Menu Admin in dropdown: soft purple accent */
+html[data-theme='candy'] .brutal-menu-dropdown a[href='/admin'] {
+  color: #7c3aed !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme='candy'] .brutal-menu-dropdown a[href='/admin']:hover {
+  background: rgba(124, 58, 237, 0.14) !important;
+}
+
+/* ============================================================
+   CANDY THEME — COLORFUL HOMEPAGE BOTTOM CARDS (Features & How-to)
+   ============================================================ */
+
+/* 1. Features Section Cards (3 boxes) */
+html[data-theme='candy'] .feature-card {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.28) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.08) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+html[data-theme='candy'] .feature-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 14px 32px -4px rgba(124, 58, 237, 0.15) !important;
+}
+
+/* Feature Card Corner Blobs */
+html[data-theme='candy'] .feature-card::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  right: -24px;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  opacity: 0.3 !important;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  z-index: 2 !important;
+}
+
+html[data-theme='candy'] .feature-card:hover::before {
+  transform: scale(1.35);
+  opacity: 0.45 !important;
+}
+
+/* Feature Card 1 (Instant Access): Cyan / Sky Blue */
+html[data-theme='candy'] .features-section .grid > div:nth-child(1)::before {
+  background: #38bdf8 !important;
+}
+
+html[data-theme='candy'] .features-section .grid > div:nth-child(1) .feature-icon-badge {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(14, 165, 233, 0.12) 100%) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+  color: #0284c7 !important;
+  border-radius: 14px !important;
+}
+
+/* Feature Card 2 (Privacy First): Violet / Lavender */
+html[data-theme='candy'] .features-section .grid > div:nth-child(2)::before {
+  background: #a855f7 !important;
+}
+
+html[data-theme='candy'] .features-section .grid > div:nth-child(2) .feature-icon-badge {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(124, 58, 237, 0.12) 100%) !important;
+  border: 1.5px solid rgba(168, 85, 247, 0.4) !important;
+  color: #7c3aed !important;
+  border-radius: 14px !important;
+}
+
+/* Feature Card 3 (Custom Domains): Rose / Hot Pink */
+html[data-theme='candy'] .features-section .grid > div:nth-child(3)::before {
+  background: #ec4899 !important;
+}
+
+html[data-theme='candy'] .features-section .grid > div:nth-child(3) .feature-icon-badge {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(244, 63, 142, 0.12) 100%) !important;
+  border: 1.5px solid rgba(236, 72, 153, 0.4) !important;
+  color: #db2777 !important;
+  border-radius: 14px !important;
+}
+
+/* 2. How-To Section Outer Wrapper */
+html[data-theme='candy'] #cara-pakai-section > div > div {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.28) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 16px 40px -8px rgba(124, 58, 237, 0.08) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+html[data-theme='candy'] #cara-pakai-section > div > div::before {
+  content: '';
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f472b6, #a78bfa);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* How-To Step Cards: Vibrant Pastel Candy Cards */
+html[data-theme='candy'] .howto-step-card {
+  border-radius: 20px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+html[data-theme='candy'] .howto-step-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
+}
+
+html[data-theme='candy'] .howto-step-card::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  opacity: 0.35 !important;
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.25s ease;
+}
+
+html[data-theme='candy'] .howto-step-card:hover::before {
+  transform: scale(1.35);
+}
+
+/* Step 01: Pastel Cyan / Sky Blue */
+html[data-theme='candy'] .howto-step-card:nth-child(1) {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(1)::before {
+  background: #38bdf8 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(1) [data-step-num] {
+  color: #0284c7 !important;
+  font-weight: 900 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(1) p:first-of-type {
+  color: #0c4a6e !important;
+  font-weight: 800 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(1) p:last-of-type {
+  color: #0369a1 !important;
+  opacity: 0.9 !important;
+}
+
+/* Step 02: Pastel Lavender / Purple */
+html[data-theme='candy'] .howto-step-card:nth-child(2) {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+  border: 1.5px solid rgba(168, 85, 247, 0.4) !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(2)::before {
+  background: #a855f7 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(2) [data-step-num] {
+  color: #7c3aed !important;
+  font-weight: 900 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(2) p:first-of-type {
+  color: #4c1d95 !important;
+  font-weight: 800 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(2) p:last-of-type {
+  color: #6d28d9 !important;
+  opacity: 0.9 !important;
+}
+
+/* Step 03: Pastel Rose / Coral Pink */
+html[data-theme='candy'] .howto-step-card:nth-child(3) {
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%) !important;
+  border: 1.5px solid rgba(236, 72, 153, 0.4) !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(3)::before {
+  background: #ec4899 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(3) [data-step-num] {
+  color: #db2777 !important;
+  font-weight: 900 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(3) p:first-of-type {
+  color: #831843 !important;
+  font-weight: 800 !important;
+}
+html[data-theme='candy'] .howto-step-card:nth-child(3) p:last-of-type {
+  color: #be185d !important;
+  opacity: 0.9 !important;
+}
+
+/* Email list rows */
+html[data-theme='candy'] div[style*='borderLeft: 4px solid transparent'],
+html[data-theme='candy'] div[style*='borderLeft: 4px solid var(--brutal-accent)'] {
+  border-radius: 12px !important;
+  transition: all 0.15s ease !important;
+}
+
+html[data-theme='candy'] div[style*='borderLeft: 4px solid transparent']:hover {
+  background: rgba(167, 139, 250, 0.08) !important;
+}
+
+/* Footer */
+html[data-theme='candy'] footer.site-footer {
+  background: rgba(245, 240, 255, 0.92) !important;
+  backdrop-filter: blur(12px) !important;
+  border-top: 1px solid rgba(167, 139, 250, 0.25) !important;
+}
+
+/* Text mappings for light candy theme */
+html[data-theme='candy'] .text-white,
+html[data-theme='candy'] .text-white\/80,
+html[data-theme='candy'] .text-gray-200,
+html[data-theme='candy'] .text-gray-300,
+html[data-theme='candy'] .text-blue-100,
+html[data-theme='candy'] .text-blue-200 {
+  color: var(--text-primary) !important;
+}
+
+html[data-theme='candy'] header .text-white,
+html[data-theme='candy'] header .text-white\/80,
+html[data-theme='candy'] .brutal-btn-accent,
+html[data-theme='candy'] .brutal-btn-accent *,
+html[data-theme='candy'] .brutal-btn-accent2,
+html[data-theme='candy'] .brutal-btn-accent2 * {
+  color: #ffffff !important;
+}
+
+html[data-theme='candy'] .text-muted-foreground {
+  color: #64748b !important;
+}
+
+html[data-theme='candy'] .text-white\/70,
+html[data-theme='candy'] .text-white\/60 {
+  color: #475569 !important;
+  font-weight: 500 !important;
+}
+
+html[data-theme='candy'] .text-white\/50,
+html[data-theme='candy'] .text-white\/40 {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+/* Accent text variants -> high-contrast readable colors */
+html[data-theme='candy'] .text-blue-200\/70,
+html[data-theme='candy'] .text-blue-300,
+html[data-theme='candy'] .text-blue-400 {
+  color: #7c3aed !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme='candy'] .text-orange-200,
+html[data-theme='candy'] .text-orange-300 {
+  color: #ea580c !important;
+}
+
+html[data-theme='candy'] .text-emerald-200,
+html[data-theme='candy'] .text-emerald-300 {
+  color: #059669 !important;
+}
+
+html[data-theme='candy'] .text-purple-200,
+html[data-theme='candy'] .text-purple-300,
+html[data-theme='candy'] .text-purple-400 {
+  color: #7c3aed !important;
+}
+
+html[data-theme='candy'] .text-red-200,
+html[data-theme='candy'] .text-red-300,
+html[data-theme='candy'] .text-red-400 {
+  color: #e11d48 !important;
+}
+
+html[data-theme='candy'] label {
+  color: #334155 !important;
+}
+
+/* ============================================================
+   CANDY THEME — TOOLS PAGES & SUB-PAGES FIXES
+   ============================================================ */
+/* Main tools container */
+html[data-theme='candy'] .glass-card {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 10px 30px -5px rgba(124, 58, 237, 0.08) !important;
+  border-radius: var(--brutal-radius-2xl) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-theme='candy'] .glass-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #f472b6 !important;
+  opacity: 0.28 !important;
+  pointer-events: none;
+}
+
+/* Individual tool cards in the grid */
+html[data-theme='candy'] .glass-card .bg-black\/40,
+html[data-theme='candy'] .bg-black\/40 {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06) !important;
+  border-radius: 16px !important;
+  color: var(--text-primary) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+html[data-theme='candy'] .glass-card .bg-black\/40:hover,
+html[data-theme='candy'] .bg-black\/40:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167, 139, 250, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12) !important;
+}
+
+/* Corner blobs on individual tool cards */
+html[data-theme='candy'] .glass-card .bg-black\/40::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  opacity: 0.28;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+}
+
+html[data-theme='candy'] .glass-card .bg-black\/40:hover::before {
+  transform: scale(1.35);
+  opacity: 0.42;
+}
+
+html[data-theme='candy'] .glass-card .bg-black\/40:nth-child(3n+1)::before { background: #38bdf8 !important; }
+html[data-theme='candy'] .glass-card .bg-black\/40:nth-child(3n+2)::before { background: #a855f7 !important; }
+html[data-theme='candy'] .glass-card .bg-black\/40:nth-child(3n)::before { background: #f472b6 !important; }
+
+/* Buttons inside tool cards */
+html[data-theme='candy'] .glass-card a.bg-white\/10,
+html[data-theme='candy'] .glass-card button.bg-white\/10,
+html[data-theme='candy'] a.bg-white\/10,
+html[data-theme='candy'] button.bg-white\/10 {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
+  transition: all 0.2s ease !important;
+}
+
+html[data-theme='candy'] .glass-card a.bg-white\/10:hover,
+html[data-theme='candy'] .glass-card button.bg-white\/10:hover,
+html[data-theme='candy'] a.bg-white\/10:hover,
+html[data-theme='candy'] button.bg-white\/10:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.45) !important;
+}
+
+/* Badge in tool header */
+html[data-theme='candy'] .glass-card span.bg-white\/10 {
+  background: rgba(167, 139, 250, 0.15) !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  color: #7c3aed !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+}
+
+/* Tool title and icons */
+html[data-theme='candy'] .glass-card h1,
+html[data-theme='candy'] .glass-card p.font-semibold {
+  color: #1e1b4b !important;
+}
+
+/* Refund Calculator Donut Chart Fix */
+html[data-theme='candy'] .refund-chart-track {
+  border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.08) !important;
+}
+
+html[data-theme='candy'] .refund-chart-hole {
+  background: #ffffff !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(167, 139, 250, 0.2) !important;
+}
+
+html[data-theme='candy'] .refund-chart-hole span.text-white\/60 {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+html[data-theme='candy'] .refund-chart-hole span.text-white {
+  color: #059669 !important;
+  font-weight: 900 !important;
+}
+
+html[data-theme='candy'] input[type='range'] {
+  accent-color: #10b981 !important;
+}
+
+/* ============================================================
+   CANDY THEME — ADMIN DASHBOARD & ADMIN PAGES FIXES
+   ============================================================ */
+html[data-theme='candy'] .min-h-screen.bg-gradient-to-b {
+  background: 
+    radial-gradient(circle at 10% 15%, rgba(244, 114, 182, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 85% 25%, rgba(34, 211, 238, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(167, 139, 250, 0.15) 0%, transparent 50%),
+    #f5f0ff !important;
+  color: var(--text-primary) !important;
+}
+
+/* Admin Outer Card */
+html[data-theme='candy'] .rounded-3xl.border-white\/10 {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.25) !important;
+  box-shadow: 0 10px 30px -5px rgba(124, 58, 237, 0.08) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Admin Inner Section Panels with Corner Blob */
+html[data-theme='candy'] .rounded-2xl.border-white\/10.bg-black\/20 {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.2) !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.05) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-theme='candy'] .rounded-2xl.border-white\/10.bg-black\/20::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #fce7f3;
+  opacity: 0.55;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+}
+
+html[data-theme='candy'] .rounded-2xl.border-white\/10.bg-black\/20:hover::before {
+  transform: scale(1.3);
+  opacity: 0.75;
+}
+
+/* Admin Sub-Cards / Stat Boxes with Corner Blob */
+html[data-theme='candy'] .rounded-xl.border-white\/10.bg-white\/5 {
+  background: #fbf9ff !important;
+  border: 1px solid rgba(167, 139, 250, 0.25) !important;
+  color: var(--text-primary) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+html[data-theme='candy'] .rounded-xl.border-white\/10.bg-white\/5::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #ede9fe;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* Admin Inputs and Textareas */
+html[data-theme='candy'] .bg-black\/30,
+html[data-theme='candy'] input.bg-black\/30,
+html[data-theme='candy'] textarea.bg-black\/30 {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
+  color: #1e1b4b !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.04) !important;
+}
+
+html[data-theme='candy'] .bg-black\/30:focus,
+html[data-theme='candy'] input.bg-black\/30:focus {
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18) !important;
+}
+
+html[data-theme='candy'] input.bg-black\/30::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Admin Buttons */
+html[data-theme='candy'] button.bg-primary,
+html[data-theme='candy'] [role='button'].bg-primary {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35) !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease !important;
+}
+
+html[data-theme='candy'] button.bg-primary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45) !important;
+}
+
+/* Kembali ke Beranda button */
+html[data-theme='candy'] a.bg-secondary,
+html[data-theme='candy'] button.bg-secondary {
+  background: rgba(167, 139, 250, 0.15) !important;
+  color: #7c3aed !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  transition: all 0.15s ease !important;
+}
+
+html[data-theme='candy'] a.bg-secondary:hover,
+html[data-theme='candy'] button.bg-secondary:hover {
+  background: rgba(167, 139, 250, 0.25) !important;
+  border-color: #8b5cf6 !important;
+}
+
+/* Admin Destructive buttons */
+html[data-theme='candy'] button.bg-red-500\/80,
+html[data-theme='candy'] button.bg-red-500 {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%) !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.3) !important;
+}
+
+html[data-theme='candy'] .border-red-300\/30 {
+  border-color: rgba(244, 63, 94, 0.35) !important;
+  background: rgba(244, 63, 94, 0.08) !important;
+  color: #e11d48 !important;
+  border-radius: 9999px !important;
+}
+
+html[data-theme='candy'] .border-red-300\/30:hover {
+  background: rgba(244, 63, 94, 0.16) !important;
+}
+
+/* Admin Theme Option Cards */
+html[data-theme='candy'] button:has(> .theme-preview-brutal),
+html[data-theme='candy'] button:has(> .theme-preview-glass),
+html[data-theme='candy'] button:has(> .theme-preview-neomorph),
+html[data-theme='candy'] button:has(> .theme-preview-candy) {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.25) !important;
+  border-radius: 14px !important;
+}
+
+html[data-theme='candy'] button:has(> .theme-preview-brutal):hover,
+html[data-theme='candy'] button:has(> .theme-preview-glass):hover,
+html[data-theme='candy'] button:has(> .theme-preview-neomorph):hover,
+html[data-theme='candy'] button:has(> .theme-preview-candy):hover {
+  background: #faf7ff !important;
+  border-color: rgba(167, 139, 250, 0.5) !important;
+}
+
+html[data-theme='candy'] .border-blue-400\/60.bg-blue-400\/10 {
+  border-color: #8b5cf6 !important;
+  background: rgba(139, 92, 246, 0.1) !important;
+}
+
+html[data-theme='candy'] .bg-blue-400\/20.text-blue-200 {
+  background: rgba(139, 92, 246, 0.18) !important;
+  color: #7c3aed !important;
+  font-weight: 800 !important;
+}
+
+/* API Access Inputs & Dropdowns */
+html[data-theme='candy'] input[style*='var(--surface)'],
+html[data-theme='candy'] select[style*='var(--surface)'],
+html[data-theme='candy'] textarea[style*='var(--surface)'] {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.35) !important;
+  color: #1e1b4b !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.04) !important;
+}
+
+html[data-theme='candy'] input[style*='var(--surface)']:focus,
+html[data-theme='candy'] select[style*='var(--surface)']:focus {
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+}
+
+/* Admin Code snippets */
+html[data-theme='candy'] code {
+  background: rgba(167, 139, 250, 0.12) !important;
+  color: #6d28d9 !important;
+  border: 1px solid rgba(167, 139, 250, 0.25) !important;
+  border-radius: 6px !important;
+}
+
+/* Admin Live indicator */
+html[data-theme='candy'] .text-emerald-200 {
+  color: #059669 !important;
+  font-weight: 700 !important;
+}
+
+/* ============================================================
+   CANDY THEME — DARK AURORA GLASSMORPHIC LOGIN (Rekapanmu style)
+   ============================================================ */
+.login-bg-blobs {
+  display: none;
+}
+
+html[data-theme='candy'] .login-bg-blobs {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+html[data-theme='candy'] .blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.38;
+  animation: blobFloat 8s ease-in-out infinite alternate;
+}
+
+html[data-theme='candy'] .blob-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #F472B6 0%, #EC4899 60%, transparent 80%);
+  top: -120px;
+  left: -120px;
+  animation-duration: 9s;
+}
+
+html[data-theme='candy'] .blob-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #A78BFA 0%, #7C3AED 60%, transparent 80%);
+  bottom: -80px;
+  right: -80px;
+  animation-duration: 11s;
+  animation-delay: -3s;
+}
+
+html[data-theme='candy'] .blob-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #22D3EE 0%, #0891B2 60%, transparent 80%);
+  top: 45%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  animation-duration: 7s;
+  animation-delay: -5s;
+}
+
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.05); }
+  66%  { transform: translate(-20px, 30px) scale(0.96); }
+  100% { transform: translate(15px, 15px) scale(1.03); }
+}
+
+/* Candy Theme Login Screen Container */
+html[data-theme='candy'] .login-screen-wrap {
+  background: linear-gradient(135deg, #1E1B4B 0%, #3B0764 40%, #1E3A5F 100%) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Hide brutal hero grid on candy login */
+html[data-theme='candy'] .login-screen-wrap .hero-grid {
+  display: none !important;
+}
+
+/* Candy Theme Login Card: Pure Frosted Glass */
+html[data-theme='candy'] .admin-login-card,
+html[data-theme='candy'] .homepage-lock-card {
+  position: relative !important;
+  z-index: 2 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(28px) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+/* Remove corner pink circle on login card in candy theme since it's dark glass */
+html[data-theme='candy'] .admin-login-card::before,
+html[data-theme='candy'] .homepage-lock-card::before {
+  display: none !important;
+}
+
+/* Logo Header */
+html[data-theme='candy'] .login-logo-header {
+  margin-bottom: 24px;
+}
+
+html[data-theme='candy'] .login-logo-icon {
+  margin-bottom: 8px;
+  animation: float 3s ease-in-out infinite;
+}
+
+html[data-theme='candy'] .login-logo-title {
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  background: linear-gradient(135deg, #F472B6, #A78BFA, #22D3EE) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  letter-spacing: 4px !important;
+  line-height: 1 !important;
+  margin-bottom: 4px !important;
+}
+
+html[data-theme='candy'] .login-logo-subtitle {
+  font-size: 11px !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  letter-spacing: 1px !important;
+  font-weight: 600 !important;
+}
+
+/* Welcome Headings */
+html[data-theme='candy'] .login-welcome-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  margin-bottom: 4px !important;
+}
+
+html[data-theme='candy'] .login-welcome-subtitle {
+  font-size: 13px !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  margin-bottom: 24px !important;
+}
+
+/* Labels */
+html[data-theme='candy'] .login-field-label {
+  display: block;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin-bottom: 8px !important;
+  letter-spacing: 0.8px !important;
+  text-align: left !important;
+}
+
+/* Glass Inputs */
+html[data-theme='candy'] .login-input {
+  width: 100% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  color: #ffffff !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+html[data-theme='candy'] .login-input::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+html[data-theme='candy'] .login-input:focus {
+  border-color: rgba(244, 114, 182, 0.7) !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2) !important;
+}
+
+/* Toggle eye button */
+html[data-theme='candy'] .toggle-pass-btn {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+html[data-theme='candy'] .toggle-pass-btn:hover {
+  color: #ffffff !important;
+}
+
+/* Submit Button: Multi-stop Aurora Gradient with Glow & Shift */
+html[data-theme='candy'] .login-submit-btn {
+  width: 100% !important;
+  padding: 13px !important;
+  background: linear-gradient(135deg, #F472B6 0%, #A78BFA 50%, #22D3EE 100%) !important;
+  background-size: 200% 200% !important;
+  animation: gradientShift 4s ease infinite !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 25px rgba(244, 114, 182, 0.4) !important;
+  letter-spacing: 0.3px !important;
+  transition: all 0.2s ease !important;
+}
+
+html[data-theme='candy'] .login-submit-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(244, 114, 182, 0.6) !important;
+  filter: brightness(1.05) !important;
+}
+
+/* Footer on Login */
+html[data-theme='candy'] .login-footer {
+  color: rgba(255, 255, 255, 0.45) !important;
+  font-weight: 500 !important;
+}
+
+/* ============================================================
    BRUTAL DESIGN SYSTEM (ruangmail.biz.id inspired)
    ============================================================ */
 
@@ -661,6 +1958,52 @@ html[data-theme='neomorph'] {
   --brutal-success: #3fb950;
   --brutal-howto-bg: rgba(57, 67, 90, 0.62);
   --brutal-divider: rgba(197, 208, 228, 0.16);
+}
+
+html[data-theme='candy'] {
+  --ink: rgba(167, 139, 250, 0.45);
+  --surface: #ffffff;
+  --brutal-bg: #f5f0ff;
+  --brutal-accent: #8b5cf6;
+  --brutal-accent-2: #ec4899;
+  --brutal-on-accent: #ffffff;
+  --text-primary: #1e1b4b;
+  --text-muted: #6b7280;
+  --brutal-shadow: 0 8px 30px rgba(124, 58, 237, 0.12), 0 2px 8px rgba(124, 58, 237, 0.05);
+  --brutal-shadow-sm: 0 4px 14px rgba(124, 58, 237, 0.08);
+  --brutal-shadow-lg: 0 16px 40px rgba(124, 58, 237, 0.16), 0 4px 12px rgba(124, 58, 237, 0.06);
+  --brutal-shadow-xl: 0 24px 50px rgba(124, 58, 237, 0.22);
+  --brutal-radius: 18px;
+  --brutal-radius-2xl: 24px;
+  --brutal-radius-full: 9999px;
+  --brutal-accent-light: rgba(167, 139, 250, 0.14);
+  --brutal-surface-2: #fbf9ff;
+  --brutal-success: #10b981;
+  --brutal-howto-bg: rgba(245, 240, 255, 0.85);
+  --brutal-divider: rgba(167, 139, 250, 0.2);
+
+  /* Tailwind HSL tokens -> candy light */
+  --background: 265 100% 98%;
+  --foreground: 243 47% 20%;
+  --card: 0 0% 100%;
+  --card-foreground: 243 47% 20%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 243 47% 20%;
+  --primary: 263 70% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 326 78% 95%;
+  --secondary-foreground: 330 81% 60%;
+  --muted: 265 50% 96%;
+  --muted-foreground: 240 5% 45%;
+  --accent: 263 70% 50%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 260 60% 90%;
+  --input: 260 60% 90%;
+  --ring: 263 70% 50%;
+  --radius: 1.1rem;
+  color-scheme: light;
 }
 
 /* Brutal (ruangmail.biz.id) default theme — light, hard borders, mono */

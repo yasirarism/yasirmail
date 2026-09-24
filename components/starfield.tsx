@@ -69,14 +69,15 @@ export function Starfield({ density = 0.5, className, style }: StarfieldProps) {
     const readTheme = () => {
       const t = document.documentElement.getAttribute('data-theme') || 'brutal';
       const dark = t === 'glass' || t === 'neomorph';
+      const isCandy = t === 'candy';
       return {
         dark,
-        // star fill — light mode uses a colorful palette (brutal), white in dark themes
+        // star fill — light mode uses a colorful palette (brutal/candy), white in dark themes
         starRgb: dark ? '255,255,255' : '',
-        // meteor gradient colors
-        meteorRgb: dark ? '200,210,255' : '26,26,26',
+        // meteor gradient colors: pastel purple for candy, light blue for dark, dark ink for brutal
+        meteorRgb: isCandy ? '167,139,250' : dark ? '200,210,255' : '26,26,26',
         // overall opacity multiplier (light theme stays subtle)
-        opacity: dark ? 1 : 0.9,
+        opacity: dark ? 1 : isCandy ? 0.95 : 0.9,
       };
     };
 
