@@ -685,8 +685,7 @@ html[data-theme='candy'] header button:not(.language-toggle button) {
 }
 
 /* Cards */
-html[data-theme='candy'] .brutal-card,
-html[data-theme='candy'] .brutal-card-lg {
+html[data-theme='candy'] .brutal-card {
   background: rgba(255, 255, 255, 0.98) !important;
   backdrop-filter: blur(16px) !important;
   border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
@@ -696,25 +695,36 @@ html[data-theme='candy'] .brutal-card-lg {
   overflow: hidden !important;
 }
 
+html[data-theme='candy'] .brutal-card-lg {
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 10px 32px rgba(124, 58, 237, 0.08), 0 2px 6px rgba(124, 58, 237, 0.04) !important;
+  border-radius: var(--brutal-radius-2xl) !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
 /* Corner Blob Ornament (inspired by Rekapanmu stat cards) */
 html[data-theme='candy'] .brutal-card-lg::before {
   content: '';
   position: absolute;
-  top: -24px;
-  right: -24px;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  top: 0;
+  right: 0;
+  width: 58px;
+  height: 58px;
+  border-top-right-radius: calc(var(--brutal-radius-2xl) - 1.5px);
+  border-bottom-left-radius: 100%;
   background: #f472b6 !important;
-  opacity: 0.35 !important;
+  opacity: 0.38 !important;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
   pointer-events: none;
   z-index: 2 !important;
 }
 
 html[data-theme='candy'] .brutal-card-lg:hover::before {
-  transform: scale(1.35);
-  opacity: 0.48 !important;
+  transform: scale(1.25);
+  opacity: 0.5 !important;
 }
 
 html[data-theme='candy'] .brutal-card::before {
@@ -976,7 +986,15 @@ html[data-theme='candy'] .brutal-chip {
 }
 
 /* Dropdown menus & dialogs */
-html[data-theme='candy'] .domain-menu-panel,
+html[data-theme='candy'] .domain-menu-panel {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  border: 1.5px solid rgba(167, 139, 250, 0.28) !important;
+  box-shadow: 0 20px 45px -8px rgba(124, 58, 237, 0.22), 0 6px 16px rgba(124, 58, 237, 0.08) !important;
+  border-radius: 16px !important;
+  z-index: 100 !important;
+}
+
 html[data-theme='candy'] .brutal-menu-dropdown {
   background: #ffffff !important;
   backdrop-filter: none !important;
