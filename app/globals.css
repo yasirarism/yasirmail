@@ -865,8 +865,8 @@ html[data-theme='candy'] button[title*='History'] {
   border-radius: 10px !important;
 }
 
-/* Base brutal-btn: white pill ONLY for non-accent buttons */
-html[data-theme='candy'] .brutal-btn:not(.brutal-btn-accent):not(.brutal-btn-accent2),
+/* Base brutal-btn: white pill ONLY for non-accent/non-success buttons */
+html[data-theme='candy'] .brutal-btn:not(.brutal-btn-accent):not(.brutal-btn-accent2):not(.brutal-btn-copied):not([style*='var(--brutal-success)']),
 html[data-theme='candy'] .brutal-btn-white,
 html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)'] {
   background: #ffffff !important;
@@ -877,13 +877,40 @@ html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)'] {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-html[data-theme='candy'] .brutal-btn:not(.brutal-btn-accent):not(.brutal-btn-accent2):hover,
+html[data-theme='candy'] .brutal-btn:not(.brutal-btn-accent):not(.brutal-btn-accent2):not(.brutal-btn-copied):not([style*='var(--brutal-success)']):hover,
 html[data-theme='candy'] .brutal-btn-white:hover,
 html[data-theme='candy'] .brutal-card-lg button[style*='var(--surface)']:hover {
   background: #faf7ff !important;
   border-color: rgba(167, 139, 250, 0.6) !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 5px 16px rgba(124, 58, 237, 0.14) !important;
+}
+
+/* Copied State Button: Radiant Emerald Green Gradient with Pure White Text */
+html[data-theme='candy'] .brutal-btn.brutal-btn-copied,
+html[data-theme='candy'] .brutal-btn-copied,
+html[data-theme='candy'] button[style*='var(--brutal-success)'],
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-success)'] {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px -2px rgba(16, 185, 129, 0.5) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme='candy'] .brutal-btn-copied,
+html[data-theme='candy'] .brutal-btn-copied *,
+html[data-theme='candy'] button[style*='var(--brutal-success)'],
+html[data-theme='candy'] button[style*='var(--brutal-success)'] *,
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-success)'],
+html[data-theme='candy'] .brutal-card-lg button[style*='var(--brutal-success)'] * {
+  color: #ffffff !important;
 }
 
 /* Accent Buttons: ALWAYS Pink/Magenta gradient with WHITE text */
@@ -1410,6 +1437,31 @@ html[data-theme='candy'] .glass-card span.bg-white\/10 {
 html[data-theme='candy'] .glass-card h1,
 html[data-theme='candy'] .glass-card p.font-semibold {
   color: #1e1b4b !important;
+}
+
+/* Refund Calculator Donut Chart Fix */
+html[data-theme='candy'] .refund-chart-track {
+  border: 1.5px solid rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.08) !important;
+}
+
+html[data-theme='candy'] .refund-chart-hole {
+  background: #ffffff !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(167, 139, 250, 0.2) !important;
+}
+
+html[data-theme='candy'] .refund-chart-hole span.text-white\/60 {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+html[data-theme='candy'] .refund-chart-hole span.text-white {
+  color: #059669 !important;
+  font-weight: 900 !important;
+}
+
+html[data-theme='candy'] input[type='range'] {
+  accent-color: #10b981 !important;
 }
 
 /* ============================================================

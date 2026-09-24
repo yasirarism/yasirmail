@@ -816,7 +816,7 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
           <button
             type="button"
             onClick={copyAddress}
-            className="brutal-btn"
+            className={copiedAddress ? 'brutal-btn brutal-btn-copied' : 'brutal-btn brutal-btn-accent'}
             style={{
               flex: 1,
               padding: '12px 14px',
@@ -828,7 +828,7 @@ export function InboxInterface({ initialAddress, locale, retentionLabel }: Inbox
               alignItems: 'center',
               justifyContent: 'center',
               gap: 8,
-              transition: 'background 0.18s',
+              transition: 'background 0.18s, color 0.18s',
             }}
           >
             {copiedAddress ? <Check className="h-4 w-4 shrink-0" /> : <Copy className="h-4 w-4 shrink-0" />}

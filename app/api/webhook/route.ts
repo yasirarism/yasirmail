@@ -83,6 +83,13 @@ const parseSettings = (value: unknown): TelegramSettings | null => {
   return null;
 };
 
+const escapeHtml = (text: string) =>
+  text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+
 const sendTelegramNotification = async (payload: {
   from: string;
   to: string;
@@ -108,31 +115,78 @@ const sendTelegramNotification = async (payload: {
   }
 
   const sender = getSenderInfo(payload.from);
-  const messageLines = [
-    '📬 New Inbox Message',
-    `From: ${sender.label}`,
-    `To: ${payload.to}`,
-    `Subject: ${payload.subject}`,
+
+  // Extract OTP or verification code if present
+  const otpMatch =
+    payload.text?.match(/(?:verification|code|otp|kode|pin)[\s:]*([0-9]{4,8})/i) ||
+    payload.subject?.match(/(?:verification|code|otp|kode|pin)[\s:]*([0-9]{4,8})/i) ||
+    payload.text?.match(/\b([0-9]{4,8})\b/);
+  const otpCode = otpMatch ? otpMatch[1] : null;
+
+  // Format as Telegram native rich HTML message
+  const richHtmlLines = [
+    '📬 <b>Pesan Masuk Baru (VaultMail)</b>',
+    '━━━━━━━━━━━━━━━━━━━━━━',
+    `👤 <b>Dari:</b> <code>${escapeHtml(sender.label || payload.from)}</code>`,
+    `🎯 <b>Kepada:</b> <code>${escapeHtml(payload.to)}</code>`,
+    `📌 <b>Subjek:</b> <b>${escapeHtml(payload.subject || '(Tanpa Subjek)')}</b>`,
+    ...(otpCode ? [
+      '',
+      '🔑 <b>KODE OTP / VERIFIKASI:</b>',
+      `<pre><code>${escapeHtml(otpCode)}</code></pre>`,
+    ] : []),
     '',
-    payload.text
+    '📝 <b>Isi Pesan:</b>',
+    `<blockquote>${escapeHtml(payload.text ? payload.text.trim().slice(0, 2500) : '(Tidak ada isi teks)')}</blockquote>`,
+    '━━━━━━━━━━━━━━━━━━━━━━',
+    `🕒 <i>${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })} WIB</i>`
   ];
 
-  const response = await fetch(
-    `https://api.telegram.org/bot${settings.botToken}/sendMessage`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: settings.chatId,
-        text: messageLines.join('\n').slice(0, 4000),
-        disable_web_page_preview: true
-      })
-    }
-  );
+  const htmlText = richHtmlLines.join('\n');
 
-  if (!response.ok) {
-    const errorBody = await response.text();
-    console.error('Telegram send failed:', response.status, errorBody);
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${settings.botToken}/sendMessage`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: settings.chatId,
+          text: htmlText,
+          parse_mode: 'HTML',
+          disable_web_page_preview: true
+        })
+      }
+    );
+
+    if (!response.ok) {
+      // If HTML parse fails, fallback to plaintext
+      const errorBody = await response.text();
+      console.error('Telegram HTML send failed, trying plaintext fallback:', response.status, errorBody);
+      const plainLines = [
+        '📬 New Inbox Message (VaultMail)',
+        `From: ${sender.label || payload.from}`,
+        `To: ${payload.to}`,
+        `Subject: ${payload.subject}`,
+        ...(otpCode ? [`OTP / Code: ${otpCode}`] : []),
+        '',
+        payload.text ? payload.text.trim().slice(0, 3500) : ''
+      ];
+      await fetch(
+        `https://api.telegram.org/bot${settings.botToken}/sendMessage`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: settings.chatId,
+            text: plainLines.join('\n'),
+            disable_web_page_preview: true
+          })
+        }
+      );
+    }
+  } catch (err) {
+    console.error('Telegram notification error:', err);
   }
 };
 
